@@ -1,0 +1,208 @@
+                            Afghanistan |          1        0.49        0.49
+                                Albania |          1        0.49        0.97
+                                Algeria |          1        0.49        1.46
+                                Andorra |          1        0.49        1.94
+                                 Angola |          1        0.49        2.43
+                    Antigua and Barbuda |          1        0.49        2.91
+                            Arab States |          1        0.49        3.40
+                              Argentina |          1        0.49        3.88
+                                Armenia |          1        0.49        4.37
+                              Australia |          1        0.49        4.85
+                                Austria |          1        0.49        5.34
+                             Azerbaijan |          1        0.49        5.83
+                                Bahamas |          1        0.49        6.31
+                                Bahrain |          1        0.49        6.80
+                             Bangladesh |          1        0.49        7.28
+                               Barbados |          1        0.49        7.77
+                                Belarus |          1        0.49        8.25
+                                Belgium |          1        0.49        8.74
+                                 Belize |          1        0.49        9.22
+                                  Benin |          1        0.49        9.71
+                                 Bhutan |          1        0.49       10.19
+       Bolivia (Plurinational State of) |          1        0.49       10.68
+                 Bosnia and Herzegovina |          1        0.49       11.17
+                               Botswana |          1        0.49       11.65
+                                 Brazil |          1        0.49       12.14
+                      Brunei Darussalam |          1        0.49       12.62
+                               Bulgaria |          1        0.49       13.11
+                           Burkina Faso |          1        0.49       13.59
+                                Burundi |          1        0.49       14.08
+                             Cabo Verde |          1        0.49       14.56
+                               Cambodia |          1        0.49       15.05
+                               Cameroon |          1        0.49       15.53
+                                 Canada |          1        0.49       16.02
+               Central African Republic |          1        0.49       16.50
+                                   Chad |          1        0.49       16.99
+                                  Chile |          1        0.49       17.48
+                                  China |          1        0.49       17.96
+                               Colombia |          1        0.49       18.45
+                                Comoros |          1        0.49       18.93
+                                  Congo |          1        0.49       19.42
+     Congo (Democratic Republic of the) |          1        0.49       19.90
+                             Costa Rica |          1        0.49       20.39
+                                Croatia |          1        0.49       20.87
+                                   Cuba |          1        0.49       21.36
+                                 Cyprus |          1        0.49       21.84
+                                Czechia |          1        0.49       22.33
+                         Côte d'Ivoire |          1        0.49       22.82
+                                Denmark |          1        0.49       23.30
+                   Developing Countries |          1        0.49       23.79
+                               Djibouti |          1        0.49       24.27
+                               Dominica |          1        0.49       24.76
+                     Dominican Republic |          1        0.49       25.24
+              East Asia and the Pacific |          1        0.49       25.73
+                                Ecuador |          1        0.49       26.21
+                                  Egypt |          1        0.49       26.70
+                            El Salvador |          1        0.49       27.18
+                      Equatorial Guinea |          1        0.49       27.67
+                                Eritrea |          1        0.49       28.16
+                                Estonia |          1        0.49       28.64
+                  Eswatini (Kingdom of) |          1        0.49       29.13
+                               Ethiopia |          1        0.49       29.61
+                Europe and Central Asia |          1        0.49       30.10
+                                   Fiji |          1        0.49       30.58
+                                Finland |          1        0.49       31.07
+                                 France |          1        0.49       31.55
+                                  Gabon |          1        0.49       32.04
+                                 Gambia |          1        0.49       32.52
+                                Georgia |          1        0.49       33.01
+                                Germany |          1        0.49       33.50
+                                  Ghana |          1        0.49       33.98
+                                 Greece |          1        0.49       34.47
+                                Grenada |          1        0.49       34.95
+                              Guatemala |          1        0.49       35.44
+                                 Guinea |          1        0.49       35.92
+                          Guinea-Bissau |          1        0.49       36.41
+                                 Guyana |          1        0.49       36.89
+                                  Haiti |          1        0.49       37.38
+                 High human development |          1        0.49       37.86
+                               Honduras |          1        0.49       38.35
+                 Hong Kong, China (SAR) |          1        0.49       38.83
+                      Human Development |          1        0.49       39.32
+                                Hungary |          1        0.49       39.81
+                                Iceland |          1        0.49       40.29
+                                  India |          1        0.49       40.78
+                              Indonesia |          1        0.49       41.26
+             Iran (Islamic Republic of) |          1        0.49       41.75
+                                   Iraq |          1        0.49       42.23
+                                Ireland |          1        0.49       42.72
+                                 Israel |          1        0.49       43.20
+                                  Italy |          1        0.49       43.69
+                                Jamaica |          1        0.49       44.17
+                                  Japan |          1        0.49       44.66
+                                 Jordan |          1        0.49       45.15
+                             Kazakhstan |          1        0.49       45.63
+                                  Kenya |          1        0.49       46.12
+                               Kiribati |          1        0.49       46.60
+                    Korea (Republic of) |          1        0.49       47.09
+                                 Kuwait |          1        0.49       47.57
+                             Kyrgyzstan |          1        0.49       48.06
+       Lao People's Democratic Republic |          1        0.49       48.54
+        Latin America and the Caribbean |          1        0.49       49.03
+                                 Latvia |          1        0.49       49.51
+              Least Developed Countries |          1        0.49       50.00
+                                Lebanon |          1        0.49       50.49
+                                Lesotho |          1        0.49       50.97
+                                Liberia |          1        0.49       51.46
+                                  Libya |          1        0.49       51.94
+                          Liechtenstein |          1        0.49       52.43
+                              Lithuania |          1        0.49       52.91
+                  Low human development |          1        0.49       53.40
+                             Luxembourg |          1        0.49       53.88
+                             Madagascar |          1        0.49       54.37
+                                 Malawi |          1        0.49       54.85
+                               Malaysia |          1        0.49       55.34
+                               Maldives |          1        0.49       55.83
+                                   Mali |          1        0.49       56.31
+                                  Malta |          1        0.49       56.80
+                       Marshall Islands |          1        0.49       57.28
+                             Mauritania |          1        0.49       57.77
+                              Mauritius |          1        0.49       58.25
+               Medium human development |          1        0.49       58.74
+                                 Mexico |          1        0.49       59.22
+       Micronesia (Federated States of) |          1        0.49       59.71
+                  Moldova (Republic of) |          1        0.49       60.19
+                               Mongolia |          1        0.49       60.68
+                             Montenegro |          1        0.49       61.17
+                                Morocco |          1        0.49       61.65
+                             Mozambique |          1        0.49       62.14
+                                Myanmar |          1        0.49       62.62
+                                Namibia |          1        0.49       63.11
+                                  Nepal |          1        0.49       63.59
+                            Netherlands |          1        0.49       64.08
+                            New Zealand |          1        0.49       64.56
+                              Nicaragua |          1        0.49       65.05
+                                  Niger |          1        0.49       65.53
+                                Nigeria |          1        0.49       66.02
+                        North Macedonia |          1        0.49       66.50
+                                 Norway |          1        0.49       66.99
+                                   Oman |          1        0.49       67.48
+Organization for Economic Co-operatio.. |          1        0.49       67.96
+                               Pakistan |          1        0.49       68.45
+                                  Palau |          1        0.49       68.93
+                    Palestine, State of |          1        0.49       69.42
+                                 Panama |          1        0.49       69.90
+                       Papua New Guinea |          1        0.49       70.39
+                               Paraguay |          1        0.49       70.87
+                                   Peru |          1        0.49       71.36
+                            Philippines |          1        0.49       71.84
+                                 Poland |          1        0.49       72.33
+                               Portugal |          1        0.49       72.82
+                                  Qatar |          1        0.49       73.30
+                                Regions |          1        0.49       73.79
+                                Romania |          1        0.49       74.27
+                     Russian Federation |          1        0.49       74.76
+                                 Rwanda |          1        0.49       75.24
+                  Saint Kitts and Nevis |          1        0.49       75.73
+                            Saint Lucia |          1        0.49       76.21
+       Saint Vincent and the Grenadines |          1        0.49       76.70
+                                  Samoa |          1        0.49       77.18
+                  Sao Tome and Principe |          1        0.49       77.67
+                           Saudi Arabia |          1        0.49       78.16
+                                Senegal |          1        0.49       78.64
+                                 Serbia |          1        0.49       79.13
+                             Seychelles |          1        0.49       79.61
+                           Sierra Leone |          1        0.49       80.10
+                              Singapore |          1        0.49       80.58
+                               Slovakia |          1        0.49       81.07
+                               Slovenia |          1        0.49       81.55
+         Small Island Developing States |          1        0.49       82.04
+                        Solomon Islands |          1        0.49       82.52
+                           South Africa |          1        0.49       83.01
+                             South Asia |          1        0.49       83.50
+                            South Sudan |          1        0.49       83.98
+                                  Spain |          1        0.49       84.47
+                              Sri Lanka |          1        0.49       84.95
+                     Sub-Saharan Africa |          1        0.49       85.44
+                                  Sudan |          1        0.49       85.92
+                               Suriname |          1        0.49       86.41
+                                 Sweden |          1        0.49       86.89
+                            Switzerland |          1        0.49       87.38
+                   Syrian Arab Republic |          1        0.49       87.86
+                             Tajikistan |          1        0.49       88.35
+          Tanzania (United Republic of) |          1        0.49       88.83
+                               Thailand |          1        0.49       89.32
+                            Timor-Leste |          1        0.49       89.81
+                                   Togo |          1        0.49       90.29
+                                  Tonga |          1        0.49       90.78
+                    Trinidad and Tobago |          1        0.49       91.26
+                                Tunisia |          1        0.49       91.75
+                                 Turkey |          1        0.49       92.23
+                           Turkmenistan |          1        0.49       92.72
+                                 Uganda |          1        0.49       93.20
+                                Ukraine |          1        0.49       93.69
+                   United Arab Emirates |          1        0.49       94.17
+                         United Kingdom |          1        0.49       94.66
+                          United States |          1        0.49       95.15
+                                Uruguay |          1        0.49       95.63
+                             Uzbekistan |          1        0.49       96.12
+                                Vanuatu |          1        0.49       96.60
+     Venezuela (Bolivarian Republic of) |          1        0.49       97.09
+            Very high human development |          1        0.49       97.57
+                               Viet Nam |          1        0.49       98.06
+                                  World |          1        0.49       98.54
+                                  Yemen |          1        0.49       99.03
+                                 Zambia |          1        0.49       99.51
+                               Zimbabwe |          1        0.49      100.00
+----------------------------------------+-----------------------------------
+                                  Total |        206      100.00

@@ -1,0 +1,168 @@
+Afghanistan |        204        0.66        0.66
+                     Africa, regional |        204        0.66        1.31
+                              Albania |        203        0.65        1.96
+                              Algeria |        201        0.65        2.61
+                    America, regional |        204        0.66        3.27
+                               Angola |        201        0.65        3.91
+                             Anguilla |         18        0.06        3.97
+                  Antigua and Barbuda |        102        0.33        4.30
+                            Argentina |        203        0.65        4.95
+                              Armenia |        201        0.65        5.60
+                       Asia, regional |        204        0.66        6.25
+                           Azerbaijan |        203        0.65        6.91
+                           Bangladesh |        204        0.66        7.56
+                              Belarus |        196        0.63        8.19
+                               Belize |        181        0.58        8.77
+                                Benin |        203        0.65        9.43
+                               Bhutan |        190        0.61       10.04
+               Bilateral, unspecified |        204        0.66       10.69
+                              Bolivia |        203        0.65       11.35
+               Bosnia and Herzegovina |        203        0.65       12.00
+                             Botswana |        183        0.59       12.59
+                               Brazil |        204        0.66       13.24
+                         Burkina Faso |        204        0.66       13.90
+                              Burundi |        199        0.64       14.54
+                           Cabo Verde |        201        0.65       15.19
+                             Cambodia |        204        0.66       15.84
+                             Cameroon |        204        0.66       16.50
+             Central African Republic |        200        0.64       17.14
+               Central Asia, regional |        196        0.63       17.77
+                                 Chad |        202        0.65       18.42
+                                Chile |        203        0.65       19.07
+         China (People's Republic of) |        204        0.66       19.73
+                             Colombia |        204        0.66       20.38
+                              Comoros |        184        0.59       20.98
+                                Congo |        202        0.65       21.62
+                         Cook Islands |        165        0.53       22.16
+                           Costa Rica |        203        0.65       22.81
+                                 Cuba |        198        0.64       23.44
+                        Côte d'Ivoire |        202        0.65       24.09
+Democratic People's Republic of Korea |        165        0.53       24.62
+     Democratic Republic of the Congo |        204        0.66       25.28
+                             Djibouti |        196        0.63       25.91
+                             Dominica |        141        0.45       26.36
+                   Dominican Republic |        202        0.65       27.01
+                              Ecuador |        204        0.66       27.67
+                                Egypt |        204        0.66       28.33
+                          El Salvador |        203        0.65       28.98
+                    Equatorial Guinea |        140        0.45       29.43
+                              Eritrea |        177        0.57       30.00
+                             Eswatini |        154        0.50       30.49
+                             Ethiopia |        204        0.66       31.15
+                     Europe, regional |        204        0.66       31.80
+              Far East Asia, regional |        195        0.63       32.43
+                                 Fiji |        197        0.63       33.06
+Former Yugoslav Republic of Macedonia |         34        0.11       33.17
+                                Gabon |        184        0.59       33.77
+                               Gambia |        194        0.62       34.39
+                              Georgia |        204        0.66       35.04
+                                Ghana |        204        0.66       35.70
+                              Grenada |        112        0.36       36.06
+                            Guatemala |        204        0.66       36.72
+                               Guinea |        204        0.66       37.37
+                        Guinea-Bissau |        197        0.63       38.01
+                               Guyana |        194        0.62       38.63
+                                Haiti |        202        0.65       39.28
+                             Honduras |        204        0.66       39.94
+                                India |        204        0.66       40.59
+                            Indonesia |        204        0.66       41.25
+                                 Iran |        185        0.59       41.84
+                                 Iraq |        194        0.62       42.47
+                              Jamaica |        190        0.61       43.08
+                               Jordan |        201        0.65       43.72
+                           Kazakhstan |        198        0.64       44.36
+                                Kenya |        204        0.66       45.01
+                             Kiribati |        185        0.59       45.61
+                               Kosovo |        199        0.64       46.25
+                           Kyrgyzstan |        203        0.65       46.90
+     Lao People's Democratic Republic |        204        0.66       47.56
+                              Lebanon |        204        0.66       48.21
+                              Lesotho |        185        0.59       48.81
+                              Liberia |        204        0.66       49.46
+                                Libya |        167        0.54       50.00
+                           Madagascar |        204        0.66       50.66
+                               Malawi |        202        0.65       51.31
+                             Malaysia |        197        0.63       51.94
+                             Maldives |        174        0.56       52.50
+                                 Mali |        203        0.65       53.15
+                     Marshall Islands |        156        0.50       53.65
+                           Mauritania |        203        0.65       54.31
+                            Mauritius |        180        0.58       54.89
+                               Mexico |        203        0.65       55.54
+                           Micronesia |        159        0.51       56.05
+                Middle East, regional |        199        0.64       56.69
+                              Moldova |        198        0.64       57.33
+                             Mongolia |        202        0.65       57.98
+                           Montenegro |        199        0.64       58.61
+                           Montserrat |        113        0.36       58.98
+                              Morocco |        204        0.66       59.63
+                           Mozambique |        204        0.66       60.29
+                              Myanmar |        204        0.66       60.95
+                              Namibia |        203        0.65       61.60
+                                Nauru |        137        0.44       62.04
+                                Nepal |        204        0.66       62.69
+                            Nicaragua |        203        0.65       63.35
+                                Niger |        201        0.65       63.99
+                              Nigeria |        204        0.66       64.65
+                                 Niue |        136        0.44       65.09
+    North & Central America, regional |        204        0.66       65.74
+                      North Macedonia |        167        0.54       66.28
+            North of Sahara, regional |        198        0.64       66.92
+                    Oceania, regional |        199        0.64       67.56
+                             Pakistan |        201        0.65       68.20
+                                Palau |        134        0.43       68.63
+                               Panama |        197        0.63       69.27
+                     Papua New Guinea |        203        0.65       69.92
+                             Paraguay |        194        0.62       70.54
+                                 Peru |        204        0.66       71.20
+                          Philippines |        204        0.66       71.85
+                               Rwanda |        204        0.66       72.51
+                         Saint Helena |        107        0.34       72.85
+                Saint Kitts and Nevis |         28        0.09       72.94
+                          Saint Lucia |        140        0.45       73.39
+     Saint Vincent and the Grenadines |        124        0.40       73.79
+                                Samoa |        183        0.59       74.38
+                Sao Tome and Principe |        183        0.59       74.97
+                              Senegal |        204        0.66       75.63
+                               Serbia |        203        0.65       76.28
+                           Seychelles |        153        0.49       76.77
+                         Sierra Leone |        202        0.65       77.42
+                      Solomon Islands |        191        0.61       78.03
+                              Somalia |        201        0.65       78.68
+       South & Central Asia, regional |        176        0.57       79.25
+                         South Africa |        204        0.66       79.90
+              South America, regional |        204        0.66       80.56
+                 South Asia, regional |        198        0.64       81.19
+                          South Sudan |        202        0.65       81.84
+            South of Sahara, regional |        204        0.66       82.50
+                            Sri Lanka |        204        0.66       83.16
+                 States Ex-Yugoslavia |         12        0.04       83.19
+     States Ex-Yugoslavia unspecified |         77        0.25       83.44
+                                Sudan |        201        0.65       84.09
+                             Suriname |        166        0.53       84.62
+                            Swaziland |         31        0.10       84.72
+                 Syrian Arab Republic |        194        0.62       85.35
+                           Tajikistan |        200        0.64       85.99
+                             Tanzania |        204        0.66       86.64
+                             Thailand |        203        0.65       87.30
+                          Timor-Leste |        202        0.65       87.95
+                                 Togo |        200        0.64       88.59
+                              Tokelau |         88        0.28       88.87
+                                Tonga |        182        0.59       89.46
+                              Tunisia |        204        0.66       90.11
+                               Turkey |        203        0.65       90.77
+                         Turkmenistan |        166        0.53       91.30
+                               Tuvalu |        156        0.50       91.80
+                               Uganda |        204        0.66       92.46
+                              Ukraine |        203        0.65       93.11
+                              Uruguay |        198        0.64       93.75
+                           Uzbekistan |        197        0.63       94.38
+                              Vanuatu |        191        0.61       94.99
+                            Venezuela |        185        0.59       95.59
+                             Viet Nam |        204        0.66       96.24
+                    Wallis and Futuna |        176        0.57       96.81
+             West Bank and Gaza Strip |        202        0.65       97.46
+                West Indies, regional |        183        0.59       98.05
+                                Yemen |        202        0.65       98.70
+                               Zambia |        204        0.66       99.35
+                             Zimbabwe

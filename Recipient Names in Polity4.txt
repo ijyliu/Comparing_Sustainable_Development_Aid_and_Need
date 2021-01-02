@@ -1,0 +1,172 @@
+
+                 country |      Freq.     Percent        Cum.
+-------------------------+-----------------------------------
+             Afghanistan |          6        0.60        0.60
+                 Albania |          6        0.60        1.20
+                 Algeria |          6        0.60        1.80
+                  Angola |          6        0.60        2.40
+               Argentina |          6        0.60        2.99
+                 Armenia |          6        0.60        3.59
+               Australia |          6        0.60        4.19
+                 Austria |          6        0.60        4.79
+              Azerbaijan |          6        0.60        5.39
+                 Bahrain |          6        0.60        5.99
+              Bangladesh |          6        0.60        6.59
+                 Belarus |          6        0.60        7.19
+                 Belgium |          6        0.60        7.78
+                   Benin |          6        0.60        8.38
+                  Bhutan |          6        0.60        8.98
+                 Bolivia |          6        0.60        9.58
+                  Bosnia |          6        0.60       10.18
+                Botswana |          6        0.60       10.78
+                  Brazil |          6        0.60       11.38
+                Bulgaria |          6        0.60       11.98
+            Burkina Faso |          6        0.60       12.57
+                 Burundi |          6        0.60       13.17
+                Cambodia |          6        0.60       13.77
+                Cameroon |          6        0.60       14.37
+                  Canada |          6        0.60       14.97
+              Cape Verde |          6        0.60       15.57
+Central African Republic |          6        0.60       16.17
+                    Chad |          6        0.60       16.77
+                   Chile |          6        0.60       17.37
+                   China |          6        0.60       17.96
+                Colombia |          6        0.60       18.56
+                 Comoros |          6        0.60       19.16
+       Congo Brazzaville |          6        0.60       19.76
+          Congo Kinshasa |          6        0.60       20.36
+              Costa Rica |          6        0.60       20.96
+           Cote D'Ivoire |          2        0.20       21.16
+                 Croatia |          6        0.60       21.76
+                    Cuba |          6        0.60       22.36
+                  Cyprus |          6        0.60       22.95
+          Czech Republic |          6        0.60       23.55
+                 Denmark |          6        0.60       24.15
+                Djibouti |          6        0.60       24.75
+      Dominican Republic |          6        0.60       25.35
+              East Timor |          4        0.40       25.75
+                 Ecuador |          6        0.60       26.35
+                   Egypt |          6        0.60       26.95
+             El Salvador |          6        0.60       27.54
+       Equatorial Guinea |          6        0.60       28.14
+                 Eritrea |          6        0.60       28.74
+                 Estonia |          6        0.60       29.34
+                Ethiopia |          6        0.60       29.94
+                    Fiji |          6        0.60       30.54
+                 Finland |          6        0.60       31.14
+                  France |          6        0.60       31.74
+                   Gabon |          6        0.60       32.34
+                  Gambia |          6        0.60       32.93
+                 Georgia |          6        0.60       33.53
+                 Germany |          6        0.60       34.13
+                   Ghana |          6        0.60       34.73
+                  Greece |          6        0.60       35.33
+               Guatemala |          6        0.60       35.93
+                  Guinea |          6        0.60       36.53
+           Guinea-Bissau |          6        0.60       37.13
+                  Guyana |          6        0.60       37.72
+                   Haiti |          6        0.60       38.32
+                Honduras |          6        0.60       38.92
+                 Hungary |          6        0.60       39.52
+                   India |          6        0.60       40.12
+               Indonesia |          6        0.60       40.72
+                    Iran |          6        0.60       41.32
+                    Iraq |          6        0.60       41.92
+                 Ireland |          6        0.60       42.51
+                  Israel |          6        0.60       43.11
+                   Italy |          6        0.60       43.71
+             Ivory Coast |          4        0.40       44.11
+                 Jamaica |          6        0.60       44.71
+                   Japan |          6        0.60       45.31
+                  Jordan |          6        0.60       45.91
+              Kazakhstan |          6        0.60       46.51
+                   Kenya |          6        0.60       47.11
+             Korea North |          6        0.60       47.70
+             Korea South |          6        0.60       48.30
+                  Kosovo |          6        0.60       48.90
+                  Kuwait |          6        0.60       49.50
+              Kyrgyzstan |          6        0.60       50.10
+                    Laos |          6        0.60       50.70
+                  Latvia |          6        0.60       51.30
+                 Lebanon |          6        0.60       51.90
+                 Lesotho |          6        0.60       52.50
+                 Liberia |          6        0.60       53.09
+                   Libya |          6        0.60       53.69
+               Lithuania |          6        0.60       54.29
+              Luxembourg |          6        0.60       54.89
+               Macedonia |          6        0.60       55.49
+              Madagascar |          6        0.60       56.09
+                  Malawi |          6        0.60       56.69
+                Malaysia |          6        0.60       57.29
+                    Mali |          6        0.60       57.88
+              Mauritania |          6        0.60       58.48
+               Mauritius |          6        0.60       59.08
+                  Mexico |          6        0.60       59.68
+                 Moldova |          6        0.60       60.28
+                Mongolia |          6        0.60       60.88
+              Montenegro |          6        0.60       61.48
+                 Morocco |          6        0.60       62.08
+              Mozambique |          6        0.60       62.67
+         Myanmar (Burma) |          6        0.60       63.27
+                 Namibia |          6        0.60       63.87
+                   Nepal |          6        0.60       64.47
+             Netherlands |          6        0.60       65.07
+             New Zealand |          6        0.60       65.67
+               Nicaragua |          6        0.60       66.27
+                   Niger |          6        0.60       66.87
+                 Nigeria |          6        0.60       67.47
+                  Norway |          6        0.60       68.06
+                    Oman |          6        0.60       68.66
+                Pakistan |          6        0.60       69.26
+                  Panama |          6        0.60       69.86
+        Papua New Guinea |          6        0.60       70.46
+                Paraguay |          6        0.60       71.06
+                    Peru |          6        0.60       71.66
+             Philippines |          6        0.60       72.26
+                  Poland |          6        0.60       72.85
+                Portugal |          6        0.60       73.45
+                   Qatar |          6        0.60       74.05
+                 Romania |          6        0.60       74.65
+                  Russia |          6        0.60       75.25
+                  Rwanda |          6        0.60       75.85
+            Saudi Arabia |          6        0.60       76.45
+                 Senegal |          6        0.60       77.05
+                  Serbia |          6        0.60       77.64
+            Sierra Leone |          6        0.60       78.24
+               Singapore |          6        0.60       78.84
+         Slovak Republic |          6        0.60       79.44
+                Slovenia |          6        0.60       80.04
+         Solomon Islands |          6        0.60       80.64
+                 Somalia |          6        0.60       81.24
+            South Africa |          6        0.60       81.84
+             South Sudan |          6        0.60       82.44
+                   Spain |          6        0.60       83.03
+               Sri Lanka |          6        0.60       83.63
+             Sudan-North |          6        0.60       84.23
+                Suriname |          6        0.60       84.83
+               Swaziland |          6        0.60       85.43
+                  Sweden |          6        0.60       86.03
+             Switzerland |          6        0.60       86.63
+                   Syria |          6        0.60       87.23
+                  Taiwan |          6        0.60       87.82
+              Tajikistan |          6        0.60       88.42
+                Tanzania |          6        0.60       89.02
+                Thailand |          6        0.60       89.62
+             Timor Leste |          2        0.20       89.82
+                    Togo |          6        0.60       90.42
+     Trinidad and Tobago |          6        0.60       91.02
+                 Tunisia |          6        0.60       91.62
+                  Turkey |          6        0.60       92.22
+            Turkmenistan |          6        0.60       92.81
+                     UAE |          6        0.60       93.41
+                  Uganda |          6        0.60       94.01
+                 Ukraine |          6        0.60       94.61
+          United Kingdom |          6        0.60       95.21
+           United States |          6        0.60       95.81
+                 Uruguay |          6        0.60       96.41
+              Uzbekistan |          6        0.60       97.01
+               Venezuela |          6        0.60       97.60
+                 Vietnam |          6        0.60       98.20
+                   Yemen |          6        0.60       98.80
+                  Zambia |          6        0.60       99.40
+                Zimbabwe |          6        0.60      100.00

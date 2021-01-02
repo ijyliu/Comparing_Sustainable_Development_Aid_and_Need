@@ -1,0 +1,190 @@
+Afghanistan |          1        0.53        0.53
+                         Albania |          1        0.53        1.05
+                         Algeria |          1        0.53        1.58
+                          Angola |          1        0.53        2.11
+             Antigua and Barbuda |          1        0.53        2.63
+                       Argentina |          1        0.53        3.16
+                         Armenia |          1        0.53        3.68
+                       Australia |          1        0.53        4.21
+                         Austria |          1        0.53        4.74
+                      Azerbaijan |          1        0.53        5.26
+                    Bahamas, The |          1        0.53        5.79
+                         Bahrain |          1        0.53        6.32
+                      Bangladesh |          1        0.53        6.84
+                        Barbados |          1        0.53        7.37
+                         Belarus |          1        0.53        7.89
+                         Belgium |          1        0.53        8.42
+                          Belize |          1        0.53        8.95
+                           Benin |          1        0.53        9.47
+                          Bhutan |          1        0.53       10.00
+                         Bolivia |          1        0.53       10.53
+          Bosnia and Herzegovina |          1        0.53       11.05
+                        Botswana |          1        0.53       11.58
+                          Brazil |          1        0.53       12.11
+               Brunei Darussalam |          1        0.53       12.63
+                        Bulgaria |          1        0.53       13.16
+                    Burkina Faso |          1        0.53       13.68
+                         Burundi |          1        0.53       14.21
+                      Cabo Verde |          1        0.53       14.74
+                        Cambodia |          1        0.53       15.26
+                        Cameroon |          1        0.53       15.79
+                          Canada |          1        0.53       16.32
+        Central African Republic |          1        0.53       16.84
+                            Chad |          1        0.53       17.37
+                           Chile |          1        0.53       17.89
+    China (People's Republic of) |          1        0.53       18.42
+                        Colombia |          1        0.53       18.95
+                         Comoros |          1        0.53       19.47
+                           Congo |          1        0.53       20.00
+                      Costa Rica |          1        0.53       20.53
+                         Croatia |          1        0.53       21.05
+                          Cyprus |          1        0.53       21.58
+                  Czech Republic |          1        0.53       22.11
+                   Côte d'Ivoire |          1        0.53       22.63
+Democratic Republic of the Congo |          1        0.53       23.16
+                         Denmark |          1        0.53       23.68
+                        Djibouti |          1        0.53       24.21
+                        Dominica |          1        0.53       24.74
+              Dominican Republic |          1        0.53       25.26
+                         Ecuador |          1        0.53       25.79
+                           Egypt |          1        0.53       26.32
+                     El Salvador |          1        0.53       26.84
+               Equatorial Guinea |          1        0.53       27.37
+                         Eritrea |          1        0.53       27.89
+                         Estonia |          1        0.53       28.42
+                        Eswatini |          1        0.53       28.95
+                        Ethiopia |          1        0.53       29.47
+                            Fiji |          1        0.53       30.00
+                         Finland |          1        0.53       30.53
+                          France |          1        0.53       31.05
+                           Gabon |          1        0.53       31.58
+                          Gambia |          1        0.53       32.11
+                         Georgia |          1        0.53       32.63
+                         Germany |          1        0.53       33.16
+                           Ghana |          1        0.53       33.68
+                          Greece |          1        0.53       34.21
+                         Grenada |          1        0.53       34.74
+                       Guatemala |          1        0.53       35.26
+                          Guinea |          1        0.53       35.79
+                   Guinea-Bissau |          1        0.53       36.32
+                          Guyana |          1        0.53       36.84
+                           Haiti |          1        0.53       37.37
+                        Honduras |          1        0.53       37.89
+            Hong Kong SAR, China |          1        0.53       38.42
+                         Hungary |          1        0.53       38.95
+                         Iceland |          1        0.53       39.47
+                           India |          1        0.53       40.00
+                       Indonesia |          1        0.53       40.53
+                            Iran |          1        0.53       41.05
+                            Iraq |          1        0.53       41.58
+                         Ireland |          1        0.53       42.11
+                          Israel |          1        0.53       42.63
+                           Italy |          1        0.53       43.16
+                         Jamaica |          1        0.53       43.68
+                           Japan |          1        0.53       44.21
+                          Jordan |          1        0.53       44.74
+                      Kazakhstan |          1        0.53       45.26
+                           Kenya |          1        0.53       45.79
+                        Kiribati |          1        0.53       46.32
+                     Korea, Rep. |          1        0.53       46.84
+                          Kosovo |          1        0.53       47.37
+                          Kuwait |          1        0.53       47.89
+                      Kyrgyzstan |          1        0.53       48.42
+Lao People's Democratic Republic |          1        0.53       48.95
+                          Latvia |          1        0.53       49.47
+                         Lebanon |          1        0.53       50.00
+                         Lesotho |          1        0.53       50.53
+                         Liberia |          1        0.53       51.05
+                           Libya |          1        0.53       51.58
+                       Lithuania |          1        0.53       52.11
+                      Luxembourg |          1        0.53       52.63
+                      Madagascar |          1        0.53       53.16
+                          Malawi |          1        0.53       53.68
+                        Malaysia |          1        0.53       54.21
+                        Maldives |          1        0.53       54.74
+                            Mali |          1        0.53       55.26
+                           Malta |          1        0.53       55.79
+                Marshall Islands |          1        0.53       56.32
+                      Mauritania |          1        0.53       56.84
+                       Mauritius |          1        0.53       57.37
+                          Mexico |          1        0.53       57.89
+                      Micronesia |          1        0.53       58.42
+                         Moldova |          1        0.53       58.95
+                        Mongolia |          1        0.53       59.47
+                      Montenegro |          1        0.53       60.00
+                         Morocco |          1        0.53       60.53
+                      Mozambique |          1        0.53       61.05
+                         Myanmar |          1        0.53       61.58
+                         Namibia |          1        0.53       62.11
+                           Nepal |          1        0.53       62.63
+                     Netherlands |          1        0.53       63.16
+                     New Zealand |          1        0.53       63.68
+                       Nicaragua |          1        0.53       64.21
+                           Niger |          1        0.53       64.74
+                         Nigeria |          1        0.53       65.26
+                 North Macedonia |          1        0.53       65.79
+                          Norway |          1        0.53       66.32
+                            Oman |          1        0.53       66.84
+                        Pakistan |          1        0.53       67.37
+                           Palau |          1        0.53       67.89
+                          Panama |          1        0.53       68.42
+                Papua New Guinea |          1        0.53       68.95
+                        Paraguay |          1        0.53       69.47
+                            Peru |          1        0.53       70.00
+                     Philippines |          1        0.53       70.53
+                          Poland |          1        0.53       71.05
+                        Portugal |          1        0.53       71.58
+              Puerto Rico (U.S.) |          1        0.53       72.11
+                           Qatar |          1        0.53       72.63
+                         Romania |          1        0.53       73.16
+              Russian Federation |          1        0.53       73.68
+                          Rwanda |          1        0.53       74.21
+           Saint Kitts and Nevis |          1        0.53       74.74
+                     Saint Lucia |          1        0.53       75.26
+Saint Vincent and the Grenadines |          1        0.53       75.79
+                           Samoa |          1        0.53       76.32
+                      San Marino |          1        0.53       76.84
+                    Saudi Arabia |          1        0.53       77.37
+                         Senegal |          1        0.53       77.89
+                          Serbia |          1        0.53       78.42
+                      Seychelles |          1        0.53       78.95
+                    Sierra Leone |          1        0.53       79.47
+                       Singapore |          1        0.53       80.00
+                 Slovak Republic |          1        0.53       80.53
+                        Slovenia |          1        0.53       81.05
+                 Solomon Islands |          1        0.53       81.58
+                         Somalia |          1        0.53       82.11
+                    South Africa |          1        0.53       82.63
+                     South Sudan |          1        0.53       83.16
+                           Spain |          1        0.53       83.68
+                       Sri Lanka |          1        0.53       84.21
+                           Sudan |          1        0.53       84.74
+                        Suriname |          1        0.53       85.26
+                          Sweden |          1        0.53       85.79
+                     Switzerland |          1        0.53       86.32
+            Syrian Arab Republic |          1        0.53       86.84
+           São Tomé and Príncipe |          1        0.53       87.37
+                   Taiwan, China |          1        0.53       87.89
+                      Tajikistan |          1        0.53       88.42
+                        Tanzania |          1        0.53       88.95
+                        Thailand |          1        0.53       89.47
+                     Timor-Leste |          1        0.53       90.00
+                            Togo |          1        0.53       90.53
+                           Tonga |          1        0.53       91.05
+             Trinidad and Tobago |          1        0.53       91.58
+                         Tunisia |          1        0.53       92.11
+                          Turkey |          1        0.53       92.63
+                          Uganda |          1        0.53       93.16
+                         Ukraine |          1        0.53       93.68
+            United Arab Emirates |          1        0.53       94.21
+                  United Kingdom |          1        0.53       94.74
+                   United States |          1        0.53       95.26
+                         Uruguay |          1        0.53       95.79
+                      Uzbekistan |          1        0.53       96.32
+                         Vanuatu |          1        0.53       96.84
+                       Venezuela |          1        0.53       97.37
+                        Viet Nam |          1        0.53       97.89
+        West Bank and Gaza Strip |          1        0.53       98.42
+                           Yemen |          1        0.53       98.95
+                          Zambia |          1        0.53       99.47
+                        Zimbabwe |          1        0.53      100.00
