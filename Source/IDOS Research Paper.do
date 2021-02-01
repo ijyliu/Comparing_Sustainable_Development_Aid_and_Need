@@ -2,14 +2,10 @@
 // Sustainable Development Aid and Need
 // Isaac Liu
 
-*****************************************************************************
-
 clear
 macro drop _all
 // Set Working Directory
-cd ""
-
-*****************************************************************************
+cd "C:\Users\Isaac Liu\OneDrive - Georgetown University\Senior\Spring Class\International Development Organizations"
 
 // Setting up Aid Data
 
@@ -64,13 +60,22 @@ collapse (sum) Value_USD, by(Year RecipientName SDG_num)
 // Aid- Move data into a wider format
 reshape wide Value_USD, i(Year RecipientName) j(SDG_num)
 
+* For later analysis
+preserve
+
+drop if strpos(RecipientName, "regional") != 0
+drop if strpos(RecipientName, "unspecified") != 0
+drop if strpos(RecipientName, "Yugoslavia") != 0
+
+save special_prep_agg, replace
+
+restore
+
 // Put in widest format
 reshape wide Value*, i(RecipientName) j(Year)
 
 // Save dataset
 save Clean_Disbursements, replace
-
-*****************************************************************************
 
 // Setting up Need Data
 
@@ -140,8 +145,7 @@ replace EnfinGap = 0 if EnfinGap < 0
 // Create a macro for the indicators for convenience
 local WBOrigInd "sp_pop_totl ny_gdp_mktp_pp_kd ag_lnd_totl_k2 si_pov_dday si_pov_gaps sh_xpd_chex_pp_cd sp_dyn_le00_in se_xpd_totl_gd_zs se_adt_litr_zs sh_h2o_smdw_zs sh_sta_smss_zs eg_elc_accs_zs ny_gdp_pcap_kd_zg sl_uem_totl_zs si_pov_gini en_pop_slum_ur_zs sp_urb_totl co2pgdp eg_elc_rnew_zs er_lnd_ptld_zs er_mrn_ptmr_zs vc_idp_tocv iq_cpa_pubs_xq iq_cpa_revn_xq iq_sci_ovrl sl_tlf_totl_in sg_dmk_alld_fn_zs sp_pop_1564_fe_in sg_tim_uwrk_fe sg_tim_uwrk_ma ie_ppi_tran_cd ie_ppi_engy_cd"
 // (Note here that periods are converted to underscores vis-a-vis the actual WB indicator codes)
-local WBCreatedInd "extPoorCt costSolvePov illiterate noSafeWater noSafeSan noElec uSlumPop unproLand unemployedCt HfinGap EfinGap PLandPGap PLandGap PMrnPGap TfinGap EnfinGap NRenShare NPSI NRM NSCS"
-* Removed gender indicators 4/19
+local WBCreatedInd "extPoorCt costSolvePov illiterate noSafeWater noSafeSan noElec uSlumPop unproLand unemployedCt womNoDecCt unpaidDomGap popUnpaidDomGap HfinGap EfinGap PLandPGap PLandGap PMrnPGap TfinGap EnfinGap NRenShare NPSI NRM NSCS"
 local WBindicators "`WBOrigInd' `WBCreatedInd'"
 
 // Data cleaning
@@ -225,9 +229,6 @@ replace RecipientName = "Yemen" if RecipientName == "Yemen, Rep."
 
 // Save World Bank Indicators
 save Clean_WB, replace
-
-*****************************************************************************
-
 clear
 
 // Pull any remaining desired UNStat data- respectively in order of codes these are
@@ -281,9 +282,9 @@ reshape wide `UNStatInd', i(RecipientName) j(TimePeriod)
 // Save
 save Clean_UNSTAT, replace
 
-*****************************************************************************
+// Maternal and child mortality- need the info on number of live births, or could calculate around this by births per woman, and then number of women
 
-* For health: consider Maternal and child mortality- need the info on number of live births, or could calculate around this by births per woman, and then number of women
+// Find a gender index/legal measure for SDG 5
 
 // Polity democracy data- add if desired, use stata thesis copy
 import excel "p4v2018", firstrow clear
@@ -318,8 +319,6 @@ replace RecipientName = "Viet Nam" if RecipientName == "Vietnam"
 reshape wide polity2, i(RecipientName) j(year)
 
 save Clean_Polity4, replace
-
-*****************************************************************************
 
 // Find a gender inequality index somewhere on the web and download it here. Focus on legal measures.
 * UN HDI Gender
@@ -358,8 +357,6 @@ replace RecipientName = "Venezuela" if RecipientName == "Venezuela (Bolivarian R
 
 save Clean_HDI_Gender, replace
 
-*****************************************************************************
-
 * World Bank: Women, Business, and the Law
 import excel "C:\Users\Isaac Liu\OneDrive - Georgetown University\Senior\Spring Class\International Development Organizations\WB WBL.xlsx", sheet("WBL1971-2020") firstrow clear
 ren A RecipientName
@@ -377,9 +374,6 @@ sum
 * Very little missing data. Index goes from 26.3 to 100.
 duplicates drop
 * No duplicates
-
-*Invert the index to represent need
-replace WBLIndex = 100 - WBLIndex
 
 * Align country names.
 * Try the same routine as WB data
@@ -408,8 +402,6 @@ reshape wide WBLIndex, i(RecipientName) j(year)
 
 save Clean_WBL, replace
 
-*****************************************************************************
-
 * Merge all datasets, toss out situations with data which is not in the aid dataset (this also tosses out situations where there is no aid data/countries are developed). merge code 2 means using (or importing data) only.
 use Clean_Disbursements, clear
 merge 1:1 RecipientName using Clean_WB, gen(merge1)
@@ -418,23 +410,9 @@ merge 1:1 RecipientName using Clean_UNSTAT, gen(merge2)
 drop if merge2 == 2
 merge 1:1 RecipientName using Clean_Polity4, gen(merge3)
 drop if merge3 == 2
-merge 1:1 RecipientName using Clean_HDI_Gender, gen(merge4)
-drop if merge4 == 2
-merge 1:1 RecipientName using Clean_WBL, gen(merge5)
-drop if merge5 == 2
-drop merge*
 *also add in some other merge vars for any other need datasets merge ops
 
-* If you want to run only from 396ish quickly activate the following:
-* local years "2012 2013 2014 2015 2016 2017"
-
 * Split off here for regional analysis.
-
-* Consider population weighting gender inequality indices. I don't know if i'll use these in future- will just leave out of analysis for now. I didn't weight the Ginis.
-*foreach year in `years' {
-*gen pGI`year' = GI`year'*sp_pop_totl`year'
-*gen pWBLIndex`year' = WBLIndex`year'*sp_pop_totl`year'
-*}
 
 * Toss out regions to focus on country data only
 drop if strpos(RecipientName, "regional") != 0
@@ -442,16 +420,12 @@ drop if strpos(RecipientName, "unspecified") != 0
 drop if strpos(RecipientName, "Yugoslavia") != 0
 tab RecipientName
 
-save fmergedready, replace
-
-*****************************************************************************
-
 * Collect summary statistics
 estpost sum
-esttab . using "sumstatsWide.rtf", cells("mean sd count") noobs replace label
+esttab . using "sumstatsWide.rtf", cells("mean sd count") noobs replace
 
 // Identify aggregable indicators, create macro
-local aggInd "extPoorCt costSolvePov SN_ITK_DEFCN HfinGap EfinGap illiterate GI WBLIndex noSafeWater noSafeSan noElec unemployedCt TfinGap EnfinGap si_pov_gini uSlumPop VC_DSR_GDPLS co2pgdp NRenShare PMrnPGap PLandPGap PLandGap vc_idp_tocv NPSI NRM NSCS"
+local aggInd "extPoorCt costSolvePov SN_ITK_DEFCN HfinGap EfinGap illiterate womNoDecCt unpaidDomGap popUnpaidDomGap noSafeWater noSafeSan noElec unemployedCt TfinGap EnfinGap si_pov_gini uSlumPop VC_DSR_GDPLS co2pgdp NRenShare PMrnPGap PLandPGap PLandGap vc_idp_tocv NPSI NRM NSCS"
 
 // Stationary (within single-year) analysis
 foreach year in `years' {
@@ -463,8 +437,9 @@ gen aidSN_ITK_DEFCN`year' = Value_USD2`year'
 gen aidHfinGap`year' = Value_USD3`year'
 gen aidEfinGap`year' = Value_USD4`year'
 gen aidilliterate`year' = Value_USD4`year'
-gen aidGI`year' = Value_USD5`year'
-gen aidWBLIndex`year' = Value_USD5`year'
+gen aidwomNoDecCt`year' = Value_USD5`year'
+gen aidunpaidDomGap`year' = Value_USD5`year'
+gen aidpopUnpaidDomGap`year' = Value_USD5`year'
 gen aidnoSafeWater`year' = Value_USD6`year'
 gen aidnoSafeSan`year' = Value_USD6`year'
 gen aidnoElec`year' = Value_USD7`year'
@@ -483,7 +458,6 @@ gen aidvc_idp_tocv`year' = Value_USD16`year'
 gen aidNPSI`year' = Value_USD16`year'
 gen aidNRM`year' = Value_USD17`year'
 gen aidNSCS`year' = Value_USD17`year'
-drop Value_USD1`year' Value_USD2`year' Value_USD3`year' Value_USD4`year' Value_USD5`year' Value_USD6`year' Value_USD7`year' Value_USD8`year' Value_USD9`year' Value_USD10`year' Value_USD11`year' Value_USD12`year' Value_USD13`year' Value_USD14`year' Value_USD15`year' Value_USD16`year' Value_USD17`year'
 
 *Compute shares of need, among only those with aid data present
 foreach indicator in `aggInd' {
@@ -514,61 +488,47 @@ foreach indicator in `aggInd' {
 egen mm`indicator'`year' = mean(Def`indicator'`year')
 gen adef`indicator'`year' = abs(Def`indicator'`year')
 egen amm`indicator'`year' = mean(adef`indicator'`year')
-egen maxamm`indicator'`year' = max(adef`indicator'`year')
-egen minamm`indicator'`year' = min(adef`indicator'`year')
-*gen sdef`indicator'`year' = (Def`indicator'`year')^2
-*egen smm`indicator'`year' = mean(sdef`indicator'`year')
+gen sdef`indicator'`year' = (Def`indicator'`year')^2
+egen smm`indicator'`year' = mean(sdef`indicator'`year')
 }
 
 *Spearman's rank coefficient analysis
 *Take advantage of the fact shares are ordinally the same as actual values.
 foreach indicator in `aggInd'{
 capture: spearman ais`indicator'`year' ns`indicator'`year'
-capture: gen sp`indicator'`year' = r(rho)
-*matrix A = r(rho)
-*esttab matrix(A, fmt(%5.2f)) using sp`indicator'`year'.rtf, replace
-*eststo clear
+matrix A = r(rho)
+esttab matrix(A, fmt(%5.2f)) using sp`indicator'`year'.rtf, replace
+eststo clear
 }
 
 *Regression analysis. Sample size unfortanately probably kind of small here.
-*foreach indicator in `aggInd' {
-*capture: reg ais`indicator'`year' ns`indicator'`year', robust
-*capture: eststo ncols`indicator'`year'
+foreach indicator in `aggInd' {
+capture: reg ais`indicator'`year' ns`indicator'`year', robust
+capture: eststo ncols`indicator'`year'
 *Throw in controls, and print their output. Just democracy (polity2) for now.
-*capture: reg ais`indicator'`year' ns`indicator'`year' polity2`year', robust
-*capture: eststo p2ols`indicator'`year'
-*capture: esttab ncols`indicator'`year' p2ols`indicator'`year' using "ols`indicator'`year'.rtf"
-*eststo clear
-*}
+capture: reg ais`indicator'`year' ns`indicator'`year' polity2`year', robust
+capture: eststo p2ols`indicator'`year'
+capture: esttab ncols`indicator'`year' p2ols`indicator'`year' using "ols`indicator'`year'.rtf"
+eststo clear
 }
 
-* Starting at a ranking or bump chart
-* Need to interpolate first due to data availability?
-* Scratch this actually, since it's persistently broken
-*foreach `year' in `years' {
-*foreach `indicator' in `aggInd' {
-*egen rankaid`indicator'`year' = rank(-ais`indicator'`year')
-*egen rankneed`indicator'`year' = rank(-ns`indicator'`year')
-*}
-*}
+}
+
+* Cleanup.
+drop Value_USD*
 
 *Save the wide format dataset
 save merged_IDOS_wide, replace
-
-*****************************************************************************
-
 use merged_IDOS_wide, clear
 
 * Cross-time Analysis
 * Tracking Absolute Mismatch over time for all countries
 preserve
-keep amm* minamm* maxamm*
+keep amm*
 duplicates drop
 gen trickVar = "a"
-local ammInds "ammextPoorCt ammcostSolvePov ammSN_ITK_DEFCN ammHfinGap ammEfinGap ammilliterate ammGI ammWBLIndex ammnoSafeWater ammnoSafeSan ammnoElec ammunemployedCt ammTfinGap ammEnfinGap ammsi_pov_gini ammuSlumPop ammVC_DSR_GDPLS ammco2pgdp ammNRenShare ammPMrnPGap ammPLandPGap ammPLandGap ammvc_idp_tocv ammNPSI ammNRM ammNSCS"
-local minammInds "minammextPoorCt minammcostSolvePov minammSN_ITK_DEFCN minammHfinGap minammEfinGap minammilliterate minammGI minammWBLIndex minammnoSafeWater minammnoSafeSan minammnoElec minammunemployedCt minammTfinGap minammEnfinGap minammsi_pov_gini minammuSlumPop minammVC_DSR_GDPLS minammco2pgdp minammNRenShare minammPMrnPGap minammPLandPGap minammPLandGap minammvc_idp_tocv minammNPSI minammNRM minammNSCS"
-local maxammInds "maxammextPoorCt maxammcostSolvePov maxammSN_ITK_DEFCN maxammHfinGap maxammEfinGap maxammilliterate maxammGI maxammWBLIndex maxammnoSafeWater maxammnoSafeSan maxammnoElec maxammunemployedCt maxammTfinGap maxammEnfinGap maxammsi_pov_gini maxammuSlumPop maxammVC_DSR_GDPLS maxammco2pgdp maxammNRenShare maxammPMrnPGap maxammPLandPGap maxammPLandGap maxammvc_idp_tocv maxammNPSI maxammNRM maxammNSCS"
-reshape long `ammInds' `minammInds' `maxammInds', i(trickVar) j(year)
+local ammInds "ammextPoorCt ammcostSolvePov ammSN_ITK_DEFCN ammHfinGap ammEfinGap ammilliterate ammwomNoDecCt ammunpaidDomGap ammpopUnpaidDomGap ammnoSafeWater ammnoSafeSan ammnoElec ammunemployedCt ammTfinGap ammEnfinGap ammsi_pov_gini ammuSlumPop ammVC_DSR_GDPLS ammco2pgdp ammNRenShare ammPMrnPGap ammPLandPGap ammPLandGap ammvc_idp_tocv ammNPSI ammNRM ammNSCS"
+reshape long `ammInds', i(trickVar) j(year)
 drop trickVar
 
 *For aesthetics and graph production
@@ -578,8 +538,9 @@ label var ammSN_ITK_DEFCN "Count of Undernourished"
 label var ammHfinGap "Health Financing Gap"
 label var ammEfinGap "Education Financing Gap"
 label var ammilliterate "Count of Illiterate"
-label var ammGI "UN HDI Gender Ineq."
-label var ammWBLIndex "Women Business and the Law Index"
+label var ammwomNoDecCt "Women Without Decision Authority"
+label var ammunpaidDomGap "Gap in Unpaid Dom. Labor"
+label var ammpopUnpaidDomGap "Pop. Weighted Gap Unpaid Dom. Labor"
 label var ammnoSafeWater "Count Without Safe Drinking Water"
 label var ammnoSafeSan "Count Without Safe Sanitation"
 label var ammnoElec "Count Without Electricity"
@@ -600,200 +561,50 @@ label var ammNRM "Revenue Mobilization Need"
 label var ammNSCS "Statistical Capacity Need"
 
 * Produce indicator amm graphs over time.
-* Old code: just the means
 tsset year
 foreach indicator in `ammInds'{
-twoway (connect `indicator' year,  cmissing(n)), ytitle(Mean Absolute Mismatch) yscale(range(0 0.05)) ylabel(#5) ttitle(Year) title(`: var label `indicator'')
+twoway (tsline `indicator',  cmissing(n)), ytitle(Mean Absolute Mismatch) yscale(range(0 0.05)) ylabel(#5) ttitle(Year) title(`: var label `indicator'')
 * Special treament including missing values or cutting the number of years for TFinGap or Urban Slum Pop? Could make this loop with an if/else split.
 graph save `indicator', replace
 }
-
 * Create a table of graphs
-graph combine "ammextPoorCt" "ammcostSolvePov" "ammSN_ITK_DEFCN" "ammHfinGap" "ammEfinGap" "ammilliterate" "ammGI" "ammWBLIndex" "ammnoSafeWater", iscale(0.4)
+graph combine "ammextPoorCt" "ammcostSolvePov" "ammSN_ITK_DEFCN" "ammHfinGap" "ammEfinGap" "ammilliterate" "ammwomNoDecCt" "ammunpaidDomGap" "ammpopUnpaidDomGap", iscale(0.4)
 graph export firstNine, as(png) name("Graph") replace
-graph combine  "ammnoSafeSan" "ammnoElec" "ammunemployedCt" "ammTfinGap" "ammEnfinGap" "ammsi_pov_gini" "ammuSlumPop" "ammVC_DSR_GDPLS" "ammco2pgdp", iscale(0.4)
+graph combine "ammnoSafeWater" "ammnoSafeSan" "ammnoElec" "ammunemployedCt" "ammTfinGap" "ammEnfinGap" "ammsi_pov_gini" "ammuSlumPop" "ammVC_DSR_GDPLS", iscale(0.4)
 graph export secondNine, as(png) name("Graph") replace
-graph combine "ammNRenShare" "ammPMrnPGap" "ammPLandPGap" "ammPLandGap" "ammvc_idp_tocv" "ammNPSI" "ammNRM" "ammNSCS", iscale(0.4)
-graph export thirdEight, as(png) name("Graph") replace
-
-*****************************************************************************
-
-* New code with min and max graphs
-tsset year
-foreach indicator in `aggInd'{
-twoway (connect amm`indicator' year,  cmissing(n)) (connect minamm`indicator' year,  cmissing(n)) (connect maxamm`indicator' year,  cmissing(n)), ytitle(Absolute Mismatch)  ttitle(Year) title(Max-Mean-Min: `: var label amm`indicator'') legend(off)
-graph save maxtominamm`indicator', replace
-}
-
-* Create a table of graphs
-graph combine "maxtominammextPoorCt" "maxtominammcostSolvePov" "maxtominammSN_ITK_DEFCN" "maxtominammHfinGap" "maxtominammEfinGap" "maxtominammilliterate" "maxtominammGI" "maxtominammWBLIndex" "maxtominammnoSafeWater", iscale(0.35)
-graph export mtmfirstNine, as(png) name("Graph") replace
-graph combine  "maxtominammnoSafeSan" "maxtominammnoElec" "maxtominammunemployedCt" "maxtominammTfinGap" "maxtominammEnfinGap" "maxtominammsi_pov_gini" "maxtominammuSlumPop" "maxtominammVC_DSR_GDPLS" "maxtominammco2pgdp", iscale(0.35)
-graph export mtmsecondNine, as(png) name("Graph") replace
-graph combine "maxtominammNRenShare" "maxtominammPMrnPGap" "maxtominammPLandPGap" "maxtominammPLandGap" "maxtominammvc_idp_tocv" "maxtominammNPSI" "maxtominammNRM" "maxtominammNSCS", iscale(0.35)
-graph export mtmthirdEight, as(png) name("Graph") replace
-
-*****************************************************************************
+graph combine "ammco2pgdp" "ammNRenShare" "ammPMrnPGap" "ammPLandPGap" "ammPLandGap" "ammvc_idp_tocv" "ammNPSI" "ammNRM" "ammNSCS", iscale(0.4)
+graph export thirdNine, as(png) name("Graph") replace
 
 * Produce a global amm graph across all indicators
 egen totAmm = rowmean(amm*)
-twoway (connect totAmm year), ytitle(Absolute Mismatch) yscale(range(0 0.05)) ylabel(#7) title(Worldwide Absolute Mismatch (Indicators Eq Weight))
+twoway (tsline totAmm), ytitle(Mean Absolute Mismatch) yscale(range(0 0.05)) ylabel(#7) title(Worldwide Mean Absolute Mismatch (All Indicator Means))
 graph export "C:\Users\Isaac Liu\OneDrive - Georgetown University\Senior\Spring Class\International Development Organizations\wwAggAMM.png", as(png) name("Graph") replace
 * Look at regular mismatch or squared mismatch if desired. Not very interpretable though.
-
-* Global amm graph, but weighting each goal equally.
-egen ammSDG1 = rowmean(ammextPoorCt ammcostSolvePov)
-gen ammSDG2 = ammSN_ITK_DEFCN
-gen ammSDG3 = ammHfinGap
-egen ammSDG4 = rowmean(ammEfinGap ammilliterate)
-egen ammSDG5 = rowmean(ammGI ammWBLIndex)
-egen ammSDG6 = rowmean(ammnoSafeWater ammnoSafeSan)
-gen ammSDG7 = ammnoElec
-gen ammSDG8 = ammunemployedCt
-egen ammSDG9 = rowmean(ammTfinGap ammEnfinGap)
-gen ammSDG10 = ammsi_pov_gini
-egen ammSDG11 = rowmean(ammuSlumPop ammVC_DSR_GDPLS)
-gen ammSDG12 = ammco2pgdp
-gen ammSDG13 = ammNRenShare
-gen ammSDG14 = ammPMrnPGap
-egen ammSDG15 = rowmean(ammPLandGap ammPLandPGap)
-egen ammSDG16 = rowmean(ammvc_idp_tocv ammNPSI)
-egen ammSDG17 = rowmean(ammNRM ammNSCS)
-egen etotAmm = rowmean(ammSDG*)
-twoway (connect etotAmm year), ytitle(Mean Absolute Mismatch) yscale(range(0 0.05)) ylabel(#7) title(Worldwide Mean Absolute Mismatch (Goals Eq Weight))
-graph export "C:\Users\Isaac Liu\OneDrive - Georgetown University\Senior\Spring Class\International Development Organizations\ewwAggAMM.png", as(png) name("Graph") replace
-
-*****************************************************************************
-
-*Throwing mins and maxes into the WW graphs
-*First, eq weight to all indicators
-egen mintotAmm = rowmin(minamm*)
-egen maxtotAmm = rowmax(maxamm*)
-twoway (connect totAmm year) (connect mintotAmm year) (connect maxtotAmm year), ytitle(Absolute Mismatch) title(Max-Mean-Min Absolute Mismatch (Indicators Eq Weight)) legend(off)
-graph export "C:\Users\Isaac Liu\OneDrive - Georgetown University\Senior\Spring Class\International Development Organizations\MtMwwAggAMM.png", as(png) name("Graph") replace
-
-*Weighting by goal
-twoway (connect etotAmm year) (connect mintotAmm year) (connect maxtotAmm year), ytitle(Absolute Mismatch) title(Max-Mean-Min Absolute Mismatch (Goals Eq Weight)) legend(off)
-graph export "C:\Users\Isaac Liu\OneDrive - Georgetown University\Senior\Spring Class\International Development Organizations\eMtMwwAggAMM.png", as(png) name("Graph") replace
-
-* Back to normal
 restore
-
-*****************************************************************************
-
-*Spearman graphing
-preserve
-
-keep sp*
-drop sp_*
-duplicates drop
-gen trickVar = "a"
-local spInds "spextPoorCt spcostSolvePov spSN_ITK_DEFCN spHfinGap spEfinGap spilliterate spGI spWBLIndex spnoSafeWater spnoSafeSan spnoElec spunemployedCt spTfinGap spEnfinGap spsi_pov_gini spuSlumPop spVC_DSR_GDPLS spco2pgdp spNRenShare spPMrnPGap spPLandPGap spPLandGap spvc_idp_tocv spNPSI spNRM spNSCS"
-reshape long `spInds', i(trickVar) j(year)
-drop trickVar
-
-label var spextPoorCt "Count of Extreme Poor" 
-label var spcostSolvePov "Cost to Solve Poverty (Perf. Targ.)"
-label var spSN_ITK_DEFCN "Count of Undernourished"
-label var spHfinGap "Health Financing Gap"
-label var spEfinGap "Education Financing Gap"
-label var spilliterate "Count of Illiterate"
-label var spGI "UN HDI Gender Ineq."
-label var spWBLIndex "Women Business and the Law Index"
-label var spnoSafeWater "Count Without Safe Drinking Water"
-label var spnoSafeSan "Count Without Safe Sanitation"
-label var spnoElec "Count Without Electricity"
-label var spunemployedCt "Count of Unemployed"
-label var spTfinGap "Transport Financing Gap"
-label var spEnfinGap "Energy Financing Gap"
-label var spsi_pov_gini "Gini Index"
-label var spuSlumPop "Urban Slum Population"
-label var spVC_DSR_GDPLS "Economic Loss to Disasters"
-label var spco2pgdp "CO2 per unit of GDP"
-label var spNRenShare "Share Non-renewable Energy"
-label var spPMrnPGap "Marine Protected Areas Percentage Gap"
-label var spPLandPGap "Protected Land Percentage Gap"
-label var spPLandGap "Protected Land Gap"
-label var spvc_idp_tocv "Internally Displaced Persons (Violence)"
-label var spNPSI "Public Sector and Institutions Need"
-label var spNRM "Revenue Mobilization Need"
-label var spNSCS "Statistical Capacity Need"
-
-* Produce indicator sp graphs over time.
-tsset year
-foreach indicator in `spInds'{
-twoway (connect `indicator' year,  cmissing(n)), ytitle(Spearman Coefficient) yscale(range(0 1)) ylabel(#5) ttitle(Year) title(`: var label `indicator'')
-* Special treament including missing values or cutting the number of years for TFinGap or Urban Slum Pop? Could make this loop with an if/else split.
-graph save `indicator', replace
-}
-
-* Create a table of graphs
-graph combine "spextPoorCt" "spcostSolvePov" "spSN_ITK_DEFCN" "spHfinGap" "spEfinGap" "spilliterate" "spGI" "spWBLIndex" "spnoSafeWater", iscale(0.4)
-graph export spfirstNine, as(png) name("Graph") replace
-graph combine  "spnoSafeSan" "spnoElec" "spunemployedCt" "spTfinGap" "spEnfinGap" "spsi_pov_gini" "spuSlumPop" "spVC_DSR_GDPLS" "spco2pgdp", iscale(0.4)
-graph export spsecondNine, as(png) name("Graph") replace
-graph combine "spNRenShare" "spPMrnPGap" "spPLandPGap" "spPLandGap" "spvc_idp_tocv" "spNPSI" "spNRM" "spNSCS", iscale(0.4)
-graph export spthirdEight, as(png) name("Graph") replace
-
-* Produce a global amm graph across all indicators
-egen totsp = rowmean(sp*)
-twoway (connect totsp year), ytitle(Spearman Coefficient) yscale(range(0 0.05)) ylabel(#7) title(Mean Spearman Coeff (Indicators Eq Weight))
-graph export "C:\Users\Isaac Liu\OneDrive - Georgetown University\Senior\Spring Class\International Development Organizations\spwwAggAMM.png", as(png) name("Graph") replace
-* Look at regular mismatch or squared mismatch if desired. Not very interpretable though.
-
-* Global amm graph, but weighting each goal equally.
-egen spSDG1 = rowmean(spextPoorCt spcostSolvePov)
-gen spSDG2 = spSN_ITK_DEFCN
-gen spSDG3 = spHfinGap
-egen spSDG4 = rowmean(spEfinGap spilliterate)
-egen spSDG5 = rowmean(spGI spWBLIndex)
-egen spSDG6 = rowmean(spnoSafeWater spnoSafeSan)
-gen spSDG7 = spnoElec
-gen spSDG8 = spunemployedCt
-egen spSDG9 = rowmean(spTfinGap spEnfinGap)
-gen spSDG10 = spsi_pov_gini
-egen spSDG11 = rowmean(spuSlumPop spVC_DSR_GDPLS)
-gen spSDG12 = spco2pgdp
-gen spSDG13 = spNRenShare
-gen spSDG14 = spPMrnPGap
-egen spSDG15 = rowmean(spPLandGap spPLandPGap)
-egen spSDG16 = rowmean(spvc_idp_tocv spNPSI)
-egen spSDG17 = rowmean(spNRM spNSCS)
-egen etotsp = rowmean(spSDG*)
-twoway (connect etotsp year), ytitle(Spearman Coefficient) yscale(range(0 1)) ylabel(#7) title(Mean Spearman Coeff (Goal Eq Weight))
-graph export "C:\Users\Isaac Liu\OneDrive - Georgetown University\Senior\Spring Class\International Development Organizations\ewwAggsp.png", as(png) name("Graph") replace
-
-*Back to normal
-restore
-
-*****************************************************************************
 
 * More micro and cross-time analysis
 * Get into long form
-local DefInds "DefextPoorCt DefcostSolvePov DefSN_ITK_DEFCN DefHfinGap DefEfinGap Defilliterate DefGI DefWBLIndex DefnoSafeWater DefnoSafeSan DefnoElec DefunemployedCt DefTfinGap DefEnfinGap Defsi_pov_gini DefuSlumPop DefVC_DSR_GDPLS Defco2pgdp DefNRenShare DefPMrnPGap DefPLandPGap DefPLandGap Defvc_idp_tocv DefNPSI DefNRM DefNSCS"
-local aisInds "aisextPoorCt aiscostSolvePov aisSN_ITK_DEFCN aisHfinGap aisEfinGap aisilliterate aisGI aisWBLIndex aisnoSafeWater aisnoSafeSan aisnoElec aisunemployedCt aisTfinGap aisEnfinGap aissi_pov_gini aisuSlumPop aisVC_DSR_GDPLS aisco2pgdp aisNRenShare aisPMrnPGap aisPLandPGap aisPLandGap aisvc_idp_tocv aisNPSI aisNRM aisNSCS"
-local nsInds "nsextPoorCt nscostSolvePov nsSN_ITK_DEFCN nsHfinGap nsEfinGap nsilliterate nsGI nsWBLIndex nsnoSafeWater nsnoSafeSan nsnoElec nsunemployedCt nsTfinGap nsEnfinGap nssi_pov_gini nsuSlumPop nsVC_DSR_GDPLS nsco2pgdp nsNRenShare nsPMrnPGap nsPLandPGap nsPLandGap nsvc_idp_tocv nsNPSI nsNRM nsNSCS"
-local aidInds "aidextPoorCt aidcostSolvePov aidSN_ITK_DEFCN aidHfinGap aidEfinGap aidilliterate aidGI aidWBLIndex aidnoSafeWater aidnoSafeSan aidnoElec aidunemployedCt aidTfinGap aidEnfinGap aidsi_pov_gini aiduSlumPop aidVC_DSR_GDPLS aidco2pgdp aidNRenShare aidPMrnPGap aidPLandPGap aidPLandGap aidvc_idp_tocv aidNPSI aidNRM aidNSCS"
+local DefInds "DefextPoorCt DefcostSolvePov DefSN_ITK_DEFCN DefHfinGap DefEfinGap Defilliterate DefwomNoDecCt DefunpaidDomGap DefpopUnpaidDomGap DefnoSafeWater DefnoSafeSan DefnoElec DefunemployedCt DefTfinGap DefEnfinGap Defsi_pov_gini DefuSlumPop DefVC_DSR_GDPLS Defco2pgdp DefNRenShare DefPMrnPGap DefPLandPGap DefPLandGap Defvc_idp_tocv DefNPSI DefNRM DefNSCS"
+local aisInds "aisextPoorCt aiscostSolvePov aisSN_ITK_DEFCN aisHfinGap aisEfinGap aisilliterate aiswomNoDecCt aisunpaidDomGap aispopUnpaidDomGap aisnoSafeWater aisnoSafeSan aisnoElec aisunemployedCt aisTfinGap aisEnfinGap aissi_pov_gini aisuSlumPop aisVC_DSR_GDPLS aisco2pgdp aisNRenShare aisPMrnPGap aisPLandPGap aisPLandGap aisvc_idp_tocv aisNPSI aisNRM aisNSCS"
+local nsInds "nsextPoorCt nscostSolvePov nsSN_ITK_DEFCN nsHfinGap nsEfinGap nsilliterate nswomNoDecCt nsunpaidDomGap nspopUnpaidDomGap nsnoSafeWater nsnoSafeSan nsnoElec nsunemployedCt nsTfinGap nsEnfinGap nssi_pov_gini nsuSlumPop nsVC_DSR_GDPLS nsco2pgdp nsNRenShare nsPMrnPGap nsPLandPGap nsPLandGap nsvc_idp_tocv nsNPSI nsNRM nsNSCS"
+local aidInds "aidextPoorCt aidcostSolvePov aidSN_ITK_DEFCN aidHfinGap aidEfinGap aidilliterate aidwomNoDecCt aidunpaidDomGap aidpopUnpaidDomGap aidnoSafeWater aidnoSafeSan aidnoElec aidunemployedCt aidTfinGap aidEnfinGap aidsi_pov_gini aiduSlumPop aidVC_DSR_GDPLS aidco2pgdp aidNRenShare aidPMrnPGap aidPLandPGap aidPLandGap aidvc_idp_tocv aidNPSI aidNRM aidNSCS"
 reshape long `aggInd' `aidInds' `DefInds' `aisInds' `nsInds' polity2, i(RecipientName) j(year `years')
 
 *Get sumstats and save this long format
 preserve
 keep `aggInd' `aidInds' polity2
 estpost sum
-esttab . using "sumstatsLong.rtf", label cells("mean sd count") noobs replace
+esttab . using "sumstatsLong.rtf", cells("mean sd count") noobs replace
 restore
 save merged_IDOS_long, replace
 
-*****************************************************************************
-
 * Disproportionate country analysis
-
 * Make more space
-drop mm* amm* sp*
+drop mm* amm* smm*
 foreach indicator in `aggInd'{
 preserve
 keep if abs(Def`indicator') > 0.1 & Def`indicator' != .
-capture: export excel RecipientName year Def`indicator' `indicator' aid`indicator' ais`indicator' ns`indicator' using "disC`indicator'.xlsx", firstrow(var) replace
+export excel RecipientName year Def`indicator' `indicator' aid`indicator' ais`indicator' ns`indicator' using "disC`indicator'.xlsx", firstrow(var) replace
 restore
 }
 
@@ -801,7 +612,7 @@ restore
 foreach indicator in `aggInd'{
 capture: spearman ais`indicator' ns`indicator'
 matrix A = r(rho)
-esttab matrix(A, fmt(%5.2f)) using "sp`indicator'.rtf", replace
+esttab matrix(A, fmt(%5.2f)) using sp`indicator'.rtf, replace
 eststo clear
 }
 
@@ -809,95 +620,18 @@ eststo clear
 *Prep for a panel analysis
 encode RecipientName, gen(rName)
 xtset rName year
-*Set up some labels
-* SHOULD I CHANGE THE AIDSHARE LABELS BACK TO SDG NAMES??? Yes.
-label var aisextPoorCt "SDG 1 (Aid Share)" 
-label var aiscostSolvePov "SDG 1 (Aid Share)"
-label var aisSN_ITK_DEFCN "SDG 2 (Aid Share)"
-label var aisHfinGap "SDG 3 (Aid Share)"
-label var aisEfinGap "SDG 4 (Aid Share)"
-label var aisilliterate "SDG 4 (Aid Share)"
-label var aisGI "SDG 5 (Aid Share)"
-label var aisWBLIndex "SDG 5 (Aid Share)"
-label var aisnoSafeWater "SDG 6 (Aid Share)"
-label var aisnoSafeSan "SDG 6 (Aid Share)"
-label var aisnoElec "SDG 7 (Aid Share)"
-label var aisunemployedCt "SDG 8 (Aid Share)"
-label var aisTfinGap "SDG 9 (Aid Share)"
-label var aisEnfinGap "SDG 9 (Aid Share)"
-label var aissi_pov_gini "SDG 10 (Aid Share)"
-label var aisuSlumPop "SDG 11 (Aid Share)"
-label var aisVC_DSR_GDPLS "SDG 11 (Aid Share)"
-label var aisco2pgdp "SDG 12 (Aid Share)"
-label var aisNRenShare "SDG 13 (Aid Share)"
-label var aisPMrnPGap "SDG 14 (Aid Share)"
-label var aisPLandPGap "SDG 15 (Aid Share)"
-label var aisPLandGap "SDG 15 (Aid Share)"
-label var aisvc_idp_tocv "SDG 16 (Aid Share)"
-label var aisNPSI "SDG 16 (Aid Share)"
-label var aisNRM "SDG 17 (Aid Share)"
-label var aisNSCS "SDG 17 (Aid Share)"
-label var nsextPoorCt "Count of Extreme Poor (Need Share)" 
-label var nscostSolvePov "Cost to Solve Poverty (Perf. Targ.) (Need Share)"
-label var nsSN_ITK_DEFCN "Count of Undernourished (Need Share)"
-label var nsHfinGap "Health Financing Gap (Need Share)"
-label var nsEfinGap "Education Financing Gap (Need Share)"
-label var nsilliterate "Count of Illiterate (Need Share)"
-label var nsGI "UN HDI Gender Ineq. (Need Share)"
-label var nsWBLIndex "Women Business and the Law Index (Need Share)"
-label var nsnoSafeWater "Count Without Safe Drinking Water (Need Share)"
-label var nsnoSafeSan "Count Without Safe Sanitation (Need Share)"
-label var nsnoElec "Count Without Electricity (Need Share)"
-label var nsunemployedCt "Count of Unemployed (Need Share)"
-label var nsTfinGap "Transport Financing Gap (Need Share)"
-label var nsEnfinGap "Energy Financing Gap (Need Share)"
-label var nssi_pov_gini "Gini Index (Need Share)"
-label var nsuSlumPop "Urban Slum Population (Need Share)"
-label var nsVC_DSR_GDPLS "Economic Loss to Disasters (Need Share)"
-label var nsco2pgdp "CO2 per unit of GDP (Need Share)"
-label var nsNRenShare "Share Non-renewable Energy (Need Share)"
-label var nsPMrnPGap "Marine Protected Areas Percentage Gap (Need Share)"
-label var nsPLandPGap "Protected Land Percentage Gap (Need Share)"
-label var nsPLandGap "Protected Land Gap (Need Share)"
-label var nsvc_idp_tocv "Internally Displaced Persons (Violence) (Need Share)"
-label var nsNPSI "Public Sector and Institutions Need (Need Share)"
-label var nsNRM "Revenue Mobilization Need (Need Share)"
-label var nsNSCS "Statistical Capacity Need (Need Share)"
-label var polity2 "Polity (Revised) Combined Democracy Score"
-*Get back to correct directions
-gen PSI = 1 - NPSI
-gen RM = 1 - NRM
-label var PSI "WGI Public Sector/Institutions score (higher = stronger)"
-label var RM "WGI Revenue Mobilization Score (higher = stronger)"
-
 *Execute regressions
 foreach indicator in `aggInd' {
 capture: reg ais`indicator' ns`indicator', robust
 capture: eststo ncols`indicator'
-*Throw in controls, and print their output. Democracy/polity 2, fixed effects, and eventually institutions and domestic resource mobilization.
+*Throw in controls, and print their output. Just democracy (polity2) for now.
 capture: reg ais`indicator' ns`indicator' polity2, robust
 capture: eststo p2ols`indicator'
-capture: reg ais`indicator' ns`indicator' polity2 PSI, robust
-capture: eststo winstp`indicator'
-capture: reg ais`indicator' ns`indicator' polity2 PSI RM, robust
-capture: eststo winstdrm`indicator'
-capture: esttab ncols`indicator' p2ols`indicator' winstp`indicator' winstdrm`indicator' using "regs`indicator'.rtf", label replace compress r2
+capture: xtreg ais`indicator' ns`indicator' polity2, fe vce(cluster rName)
+capture: eststo pfe`indicator'
+capture: esttab ncols`indicator' p2ols`indicator' pfe`indicator' using "regs`indicator'.rtf", r2 replace compress
 eststo clear
 }
-
-*Across all indicators/sectors regressions.
-egen avgais = rowmean(ais*)
-egen avgns = rowmean(ns*)
-capture: reg avgais avgns, robust
-capture: eststo avgncols
-*Throw in controls, and print their output. Democracy/polity 2, fixed effects, and eventually institutions and domestic resource mobilization.
-capture: reg avgais avgns polity2, robust
-capture: eststo avgp2ols
-capture: reg avgais avgns polity2 PSI, robust
-capture: eststo avgwinstp
-capture: reg avgais avgns polity2 PSI RM, robust
-capture: eststo avgwinstdrm
-capture: esttab avgncols avgp2ols avgwinstp avgwinstdrm using "avgregs.rtf", label replace compress
 
 *Analysis for countries by year across all indicators. Optional, perhaps return to later, not too interesting beyond what was already done in disprop c analysis likely.
 *preserve
@@ -914,6 +648,27 @@ capture: esttab avgncols avgp2ols avgwinstp avgwinstdrm using "avgregs.rtf", lab
 *Single/overall spearman and regression for need and aid for all indicators.
 *In both of these cases, do means.
 
+* Starting at a ranking or bump chart
+* Need to interpolate first due to data availability?
+* Create a ranking variable, being sure to first negate
+* egen rank = rank(-revenue)
+* do this by year
+
 save merged_IDOs_end, replace
 
-* Regional analysis: reload if desired.
+* counting the number of countries
+use merged_IDOs_wide, clear
+tab RecipientName
+* There are 150 countries
+tab RecipientName if sp_pop_totl2012 != .
+* The above reveals that only about 140 have WB data, good proxy for being computable/relevant. All should have aid data since they were in the OECD set.
+
+// Regional analysis
+* Reload the whole dataset I guess. Need the preserve/restore for other stuff
+
+* Quantifying aid scale.
+use special_prep_agg, replace
+collapse (sum) Value*, by(Year)
+collapse (mean) Value*
+export excel using "goal_ann_means"
+save goal_ann_means, replace
