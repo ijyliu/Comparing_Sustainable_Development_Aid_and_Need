@@ -417,7 +417,7 @@ replace RecipientName = "Sao Tome and Principe" if RecipientName == "São Tomé 
 *Prep for merging
 reshape wide WBLIndex, i(RecipientName) j(year)
 
-save "${Intermediate_Data}Clean_WBL", replace
+save "${Intermediate_Data}/Clean_WBL", replace
 
 *****************************************************************************
 
@@ -453,13 +453,13 @@ drop if strpos(RecipientName, "unspecified") != 0
 drop if strpos(RecipientName, "Yugoslavia") != 0
 tab RecipientName
 
-save "${Intermediate_Data}fmergedready", replace
+save "${Intermediate_Data}/fmergedready", replace
 
 *****************************************************************************
 
 * Collect summary statistics
 estpost sum
-esttab . using "sumstatsWide.rtf", cells("mean sd count") noobs replace label
+esttab . using "sumstatsWide.tex", cells("mean sd count") noobs replace label
 
 // Identify aggregable indicators, create macro
 local aggInd "extPoorCt costSolvePov SN_ITK_DEFCN HfinGap EfinGap illiterate GI WBLIndex noSafeWater noSafeSan noElec unemployedCt TfinGap EnfinGap si_pov_gini uSlumPop VC_DSR_GDPLS co2pgdp NRenShare PMrnPGap PLandPGap PLandGap vc_idp_tocv NPSI NRM NSCS"
@@ -537,7 +537,7 @@ foreach indicator in `aggInd'{
 capture: spearman ais`indicator'`year' ns`indicator'`year'
 capture: gen sp`indicator'`year' = r(rho)
 *matrix A = r(rho)
-*esttab matrix(A, fmt(%5.2f)) using sp`indicator'`year'.rtf, replace
+*esttab matrix(A, fmt(%5.2f)) using sp`indicator'`year'.tex, replace
 *eststo clear
 }
 
@@ -548,7 +548,7 @@ capture: gen sp`indicator'`year' = r(rho)
 *Throw in controls, and print their output. Just democracy (polity2) for now.
 *capture: reg ais`indicator'`year' ns`indicator'`year' polity2`year', robust
 *capture: eststo p2ols`indicator'`year'
-*capture: esttab ncols`indicator'`year' p2ols`indicator'`year' using "ols`indicator'`year'.rtf"
+*capture: esttab ncols`indicator'`year' p2ols`indicator'`year' using "ols`indicator'`year'.tex"
 *eststo clear
 *}
 }
@@ -564,7 +564,7 @@ capture: gen sp`indicator'`year' = r(rho)
 *}
 
 *Save the wide format dataset
-save "${Intermediate_Data}merged_IDOS_wide", replace
+save "${Intermediate_Data}/merged_IDOS_wide", replace
 
 *****************************************************************************
 
@@ -791,9 +791,9 @@ reshape long `aggInd' `aidInds' `DefInds' `aisInds' `nsInds' polity2, i(Recipien
 preserve
 keep `aggInd' `aidInds' polity2
 estpost sum
-esttab . using "sumstatsLong.rtf", label cells("mean sd count") noobs replace
+esttab . using "sumstatsLong.tex", label cells("mean sd count") noobs replace
 restore
-save "${Intermediate_Data}merged_IDOS_long", replace
+save "${Intermediate_Data}/merged_IDOS_long", replace
 
 *****************************************************************************
 
@@ -812,7 +812,7 @@ restore
 foreach indicator in `aggInd'{
 capture: spearman ais`indicator' ns`indicator'
 matrix A = r(rho)
-esttab matrix(A, fmt(%5.2f)) using "sp`indicator'.rtf", replace
+esttab matrix(A, fmt(%5.2f)) using "sp`indicator'.tex", replace
 eststo clear
 }
 
@@ -892,7 +892,7 @@ capture: reg ais`indicator' ns`indicator' polity2 PSI, robust
 capture: eststo winstp`indicator'
 capture: reg ais`indicator' ns`indicator' polity2 PSI RM, robust
 capture: eststo winstdrm`indicator'
-capture: esttab ncols`indicator' p2ols`indicator' winstp`indicator' winstdrm`indicator' using "regs`indicator'.rtf", label replace compress r2
+capture: esttab ncols`indicator' p2ols`indicator' winstp`indicator' winstdrm`indicator' using "regs`indicator'.tex", label replace compress r2
 eststo clear
 }
 
@@ -908,7 +908,7 @@ capture: reg avgais avgns polity2 PSI, robust
 capture: eststo avgwinstp
 capture: reg avgais avgns polity2 PSI RM, robust
 capture: eststo avgwinstdrm
-capture: esttab avgncols avgp2ols avgwinstp avgwinstdrm using "avgregs.rtf", label replace compress
+capture: esttab avgncols avgp2ols avgwinstp avgwinstdrm using "avgregs.tex", label replace compress
 
 *Analysis for countries by year across all indicators. Optional, perhaps return to later, not too interesting beyond what was already done in disprop c analysis likely.
 *preserve
@@ -925,6 +925,6 @@ capture: esttab avgncols avgp2ols avgwinstp avgwinstdrm using "avgregs.rtf", lab
 *Single/overall spearman and regression for need and aid for all indicators.
 *In both of these cases, do means.
 
-save "${Intermediate_Data}merged_IDOs_end", replace
+save "${Intermediate_Data}/merged_IDOs_end", replace
 
 * Regional analysis: reload if desired.
