@@ -681,6 +681,7 @@ egen ammSDG15 = rowmean(ammPLandGap ammPLandPGap)
 egen ammSDG16 = rowmean(ammvc_idp_tocv ammNPSI)
 egen ammSDG17 = rowmean(ammNRM ammNSCS)
 egen etotAmm = rowmean(ammSDG*)
+
 twoway (connect etotAmm year), ytitle(Mean Absolute Mismatch) yscale(range(0 0.05)) ylabel(#7) title(Worldwide Mean Absolute Mismatch (Goals Eq Weight))
 graph export "${Figures}/ewwAggAMM.png", as(png) name("Graph") replace
 
@@ -690,6 +691,7 @@ graph export "${Figures}/ewwAggAMM.png", as(png) name("Graph") replace
 *First, eq weight to all indicators
 egen mintotAmm = rowmin(minamm*)
 egen maxtotAmm = rowmax(maxamm*)
+
 twoway (connect totAmm year) (connect mintotAmm year) (connect maxtotAmm year), ytitle(Absolute Mismatch) title(Max-Mean-Min Absolute Mismatch (Indicators Eq Weight)) legend(off)
 graph export "${Figures}/MtMwwAggAMM.png", as(png) name("Graph") replace
 
@@ -749,12 +751,14 @@ foreach indicator in `spInds'{
 }
 
 * Create a table of graphs
-graph combine "spextPoorCt" "spcostSolvePov" "spSN_ITK_DEFCN" "spHfinGap" "spEfinGap" "spilliterate" "spGI" "spWBLIndex" "spnoSafeWater", iscale(0.4)
-graph export spfirstNine, as(png) name("Graph") replace
-graph combine  "spnoSafeSan" "spnoElec" "spunemployedCt" "spTfinGap" "spEnfinGap" "spsi_pov_gini" "spuSlumPop" "spVC_DSR_GDPLS" "spco2pgdp", iscale(0.4)
-graph export spsecondNine, as(png) name("Graph") replace
-graph combine "spNRenShare" "spPMrnPGap" "spPLandPGap" "spPLandGap" "spvc_idp_tocv" "spNPSI" "spNRM" "spNSCS", iscale(0.4)
-graph export spthirdEight, as(png) name("Graph") replace
+graph combine "${Intermediate_Figures}/spextPoorCt" "${Intermediate_Figures}/spcostSolvePov" "${Intermediate_Figures}/spSN_ITK_DEFCN" "${Intermediate_Figures}/spHfinGap" "${Intermediate_Figures}/spEfinGap" "${Intermediate_Figures}/spilliterate" "${Intermediate_Figures}/spGI" "${Intermediate_Figures}/spWBLIndex" "${Intermediate_Figures}/spnoSafeWater", iscale(0.4)
+graph export "${Figures}/spfirstNine", as(png) name("Graph") replace
+
+graph combine  "${Intermediate_Figures}/spnoSafeSan" "${Intermediate_Figures}/spnoElec" "${Intermediate_Figures}/spunemployedCt" "${Intermediate_Figures}/spTfinGap" "${Intermediate_Figures}/spEnfinGap" "${Intermediate_Figures}/spsi_pov_gini" "${Intermediate_Figures}/spuSlumPop" "${Intermediate_Figures}/spVC_DSR_GDPLS" "${Intermediate_Figures}/spco2pgdp", iscale(0.4)
+graph export "${Figures}/spsecondNine", as(png) name("Graph") replace
+
+graph combine "${Intermediate_Figures}/spNRenShare" "${Intermediate_Figures}/spPMrnPGap" "${Intermediate_Figures}/spPLandPGap" "${Intermediate_Figures}/spPLandGap" "${Intermediate_Figures}/spvc_idp_tocv" "${Intermediate_Figures}/spNPSI" "${Intermediate_Figures}/spNRM" "${Intermediate_Figures}/spNSCS", iscale(0.4)
+graph export "${Figures}/spthirdEight", as(png) name("Graph") replace
 
 * Produce a global amm graph across all indicators
 egen totsp = rowmean(sp*)
