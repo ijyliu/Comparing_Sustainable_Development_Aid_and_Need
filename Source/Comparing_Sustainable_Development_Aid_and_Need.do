@@ -13,6 +13,7 @@ global Root = "~/repo/Comparing_Sustainable_Development_Aid_and_Need"
 global Input = "${Root}/Input"
 global Output = "${Root}/Output"
 global Intermediate_Data = "${Output}/Intermediate_Data"
+global Intermediate_Figures = "${Output}/Intermediate_Figures"
 global Regressions = "${Output}/Regressions"
 global Figures = "${Output}/Figures"
 
@@ -245,6 +246,7 @@ clear
 // Econ loss due to natural disasters (current USD), and as share of GDP
 // Count of undernourished people (in lieu of preferable calorie data)
 import excel "${Input}/UNSTAT Hunger and Disaster Econ Loss.xlsx", sheet("data") firstrow
+
 keep if SeriesCode == "VC_DSR_GDPLS" | SeriesCode == "VC_DSR_LSGP" | SeriesCode == "SN_ITK_DEFCN"
 keep SeriesCode TimePeriod GeoAreaName Value
 
@@ -298,6 +300,7 @@ save "${Intermediate_Data}/Clean_UNSTAT", replace
 
 // Polity democracy data- add if desired, use stata thesis copy
 import excel "${Input}/p4v2018.xls", firstrow clear
+
 keep country year polity2
 drop if year < 2012 | year > 2017
 
@@ -335,6 +338,7 @@ save "${Intermediate_Data}/Clean_Polity4", replace
 // Find a gender inequality index somewhere on the web and download it here. Focus on legal measures.
 * UN HDI Gender
 import excel "${Input}/HDI Gender.xlsx", sheet("HDI Gender") firstrow clear
+
 ren Country RecipientName
 ren B GI2012
 ren C GI2013
@@ -373,6 +377,7 @@ save "${Intermediate_Data}/Clean_HDI_Gender", replace
 
 * World Bank: Women, Business, and the Law
 import excel "${Input}/WB WBL.xlsx", sheet("WBL1971-2020") firstrow clear
+
 ren A RecipientName
 ren B year
 ren C WBLIndex
@@ -422,7 +427,9 @@ save "${Intermediate_Data}/Clean_WBL", replace
 *****************************************************************************
 
 * Merge all datasets, toss out situations with data which is not in the aid dataset (this also tosses out situations where there is no aid data/countries are developed). merge code 2 means using (or importing data) only.
+
 use Clean_Disbursements, clear
+
 merge 1:1 RecipientName using Clean_WB, gen(merge1)
 drop if merge1 == 2
 merge 1:1 RecipientName using Clean_UNSTAT, gen(merge2)
@@ -615,16 +622,18 @@ tsset year
 foreach indicator in `ammInds'{
     twoway (connect `indicator' year,  cmissing(n)), ytitle(Mean Absolute Mismatch) yscale(range(0 0.05)) ylabel(#5) ttitle(Year) title(`: var label `indicator'')
     * Special treament including missing values or cutting the number of years for TFinGap or Urban Slum Pop? Could make this loop with an if/else split.
-    graph save `indicator', replace
+    graph save "${Intermediate_Figures}/`indicator'", replace
 }
 
-* Create a table of graphs
-graph combine "ammextPoorCt" "ammcostSolvePov" "ammSN_ITK_DEFCN" "ammHfinGap" "ammEfinGap" "ammilliterate" "ammGI" "ammWBLIndex" "ammnoSafeWater", iscale(0.4)
-graph export firstNine, as(png) name("Graph") replace
-graph combine  "ammnoSafeSan" "ammnoElec" "ammunemployedCt" "ammTfinGap" "ammEnfinGap" "ammsi_pov_gini" "ammuSlumPop" "ammVC_DSR_GDPLS" "ammco2pgdp", iscale(0.4)
-graph export secondNine, as(png) name("Graph") replace
-graph combine "ammNRenShare" "ammPMrnPGap" "ammPLandPGap" "ammPLandGap" "ammvc_idp_tocv" "ammNPSI" "ammNRM" "ammNSCS", iscale(0.4)
-graph export thirdEight, as(png) name("Graph") replace
+* Create a table of graphs- three batches
+graph combine "${Intermediate_Figures}/ammextPoorCt" "${Intermediate_Figures}/ammcostSolvePov" "${Intermediate_Figures}/ammSN_ITK_DEFCN" "${Intermediate_Figures}/ammHfinGap" "${Intermediate_Figures}/ammEfinGap" "${Intermediate_Figures}/ammilliterate" "${Intermediate_Figures}/ammGI" "${Intermediate_Figures}/ammWBLIndex" "${Intermediate_Figures}/ammnoSafeWater", iscale(0.4)
+graph export "${Figures}/firstNine", as(png) name("Graph") replace
+
+graph combine  "${Intermediate_Figures}/ammnoSafeSan" "${Intermediate_Figures}/ammnoElec" "${Intermediate_Figures}/ammunemployedCt" "${Intermediate_Figures}/ammTfinGap" "${Intermediate_Figures}/ammEnfinGap" "${Intermediate_Figures}/ammsi_pov_gini" "${Intermediate_Figures}/ammuSlumPop" "${Intermediate_Figures}/ammVC_DSR_GDPLS" "${Intermediate_Figures}/ammco2pgdp", iscale(0.4)
+graph export "${Figures}/secondNine", as(png) name("Graph") replace
+
+graph combine "${Intermediate_Figures}/ammNRenShare" "${Intermediate_Figures}/ammPMrnPGap" "${Intermediate_Figures}/ammPLandPGap" "${Intermediate_Figures}/ammPLandGap" "${Intermediate_Figures}/ammvc_idp_tocv" "${Intermediate_Figures}/ammNPSI" "${Intermediate_Figures}/ammNRM" "${Intermediate_Figures}/ammNSCS", iscale(0.4)
+graph export "${Figures}/thirdEight", as(png) name("Graph") replace
 
 *****************************************************************************
 
@@ -632,16 +641,18 @@ graph export thirdEight, as(png) name("Graph") replace
 tsset year
 foreach indicator in `aggInd'{
     twoway (connect amm`indicator' year,  cmissing(n)) (connect minamm`indicator' year,  cmissing(n)) (connect maxamm`indicator' year,  cmissing(n)), ytitle(Absolute Mismatch)  ttitle(Year) title(Max-Mean-Min: `: var label amm`indicator'') legend(off)
-    graph save "${Figures}/maxtominamm`indicator'", replace
+    graph save "${Intermediate_Figures}/maxtominamm`indicator'", replace
 }
 
 * Create a table of graphs
-graph combine "${Figures}/maxtominammextPoorCt" "maxtominammcostSolvePov" "maxtominammSN_ITK_DEFCN" "maxtominammHfinGap" "maxtominammEfinGap" "maxtominammilliterate" "maxtominammGI" "maxtominammWBLIndex" "maxtominammnoSafeWater", iscale(0.35)
-graph export "${Figures}/mtmfirstNine, as(png) name("Graph") replace
-graph combine  "maxtominammnoSafeSan" "maxtominammnoElec" "maxtominammunemployedCt" "maxtominammTfinGap" "maxtominammEnfinGap" "maxtominammsi_pov_gini" "maxtominammuSlumPop" "maxtominammVC_DSR_GDPLS" "maxtominammco2pgdp", iscale(0.35)
-graph export "${Figures}/mtmsecondNine, as(png) name("Graph") replace
-graph combine "maxtominammNRenShare" "maxtominammPMrnPGap" "maxtominammPLandPGap" "maxtominammPLandGap" "maxtominammvc_idp_tocv" "maxtominammNPSI" "maxtominammNRM" "maxtominammNSCS", iscale(0.35)
-graph export "${Figures}/mtmthirdEight, as(png) name("Graph") replace
+graph combine "${Intermediate_Figures}/maxtominammextPoorCt" "${Intermediate_Figures}/maxtominammcostSolvePov" "${Intermediate_Figures}/maxtominammSN_ITK_DEFCN" "${Intermediate_Figures}/maxtominammHfinGap" "${Intermediate_Figures}/maxtominammEfinGap" "${Intermediate_Figures}/maxtominammilliterate" "${Intermediate_Figures}/maxtominammGI" "${Intermediate_Figures}/maxtominammWBLIndex" "${Intermediate_Figures}/maxtominammnoSafeWater", iscale(0.35)
+graph export "${Figures}/mtmfirstNine", as(png) name("Graph") replace
+
+graph combine  "${Intermediate_Figures}/maxtominammnoSafeSan" "${Intermediate_Figures}/maxtominammnoElec" "${Intermediate_Figures}/maxtominammunemployedCt" "${Intermediate_Figures}/maxtominammTfinGap" "${Intermediate_Figures}/maxtominammEnfinGap" "${Intermediate_Figures}/maxtominammsi_pov_gini" "${Intermediate_Figures}/maxtominammuSlumPop" "${Intermediate_Figures}/maxtominammVC_DSR_GDPLS" "${Intermediate_Figures}/maxtominammco2pgdp", iscale(0.35)
+graph export "${Figures}/mtmsecondNine", as(png) name("Graph") replace
+
+graph combine "${Intermediate_Figures}/maxtominammNRenShare" "${Intermediate_Figures}/maxtominammPMrnPGap" "${Intermediate_Figures}/maxtominammPLandPGap" "${Intermediate_Figures}/maxtominammPLandGap" "${Intermediate_Figures}/maxtominammvc_idp_tocv" "${Intermediate_Figures}/maxtominammNPSI" "${Intermediate_Figures}/maxtominammNRM" "${Intermediate_Figures}/maxtominammNSCS", iscale(0.35)
+graph export "${Figures}/mtmthirdEight", as(png) name("Graph") replace
 
 *****************************************************************************
 
@@ -734,7 +745,7 @@ tsset year
 foreach indicator in `spInds'{
     twoway (connect `indicator' year,  cmissing(n)), ytitle(Spearman Coefficient) yscale(range(0 1)) ylabel(#5) ttitle(Year) title(`: var label `indicator'')
     * Special treament including missing values or cutting the number of years for TFinGap or Urban Slum Pop? Could make this loop with an if/else split.
-    graph save "${Figures}/`indicator'", replace
+    graph save "${Intermediate_Figures}/`indicator'", replace
 }
 
 * Create a table of graphs
@@ -793,6 +804,7 @@ keep `aggInd' `aidInds' polity2
 estpost sum
 esttab . using "${Tables}/sumstatsLong.tex", label cells("mean sd count") noobs replace
 restore
+
 save "${Intermediate_Data}/merged_IDOS_long", replace
 
 *****************************************************************************
