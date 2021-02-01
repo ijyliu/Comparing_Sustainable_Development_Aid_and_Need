@@ -6,8 +6,19 @@
 
 clear
 macro drop _all
-// Set Working Directory
-cd ""
+
+// Set paths
+* The root directory line below should be the only setting which a user has to customize for their computer
+global Root = "~/repo/Comparing_Sustainable_Development_Aid_and_Need"
+global Input = "${Root}/Input"
+global Output = "${Root}/Output"
+global Intermediate_Data = "${Output}/Intermediate_Data"
+global Regressions = "${Output}/Regressions"
+global Figures = "${Output}/Figures"
+
+* Programs needed
+ssc install wbopendata, replace
+ssc install estout, replace
 
 *****************************************************************************
 
@@ -16,7 +27,7 @@ cd ""
 // Download SDG Financing Data from: https://sdg-financing-lab.oecd.org/explore?country=All%20providers&distribution=providers&finance=Disbursement&from=2012&oda=true&oof=false&other%20private%20flows=false&private%20grants=false&target=All%20Recipients&to=2017
 
 // Convert to XLSX File Format, load into Stata
-import excel "AP ODA 12-17 Dis", firstrow
+import excel "${Input}/AP ODA 12-17 Dis.xlsx", firstrow
 
 // Data Cleaning- Variable Renaming
 label var Value_USD "Disbursements, Millions USD"
@@ -68,7 +79,7 @@ reshape wide Value_USD, i(Year RecipientName) j(SDG_num)
 reshape wide Value*, i(RecipientName) j(Year)
 
 // Save dataset
-save Clean_Disbursements, replace
+save "${Intermediate_Data}/Clean_Disbursements", replace
 
 *****************************************************************************
 
@@ -224,7 +235,7 @@ replace RecipientName = "Yemen" if RecipientName == "Yemen, Rep."
 // (Optional) Align Region Names
 
 // Save World Bank Indicators
-save Clean_WB, replace
+save "${Intermediate_Data}/Clean_WB", replace
 
 *****************************************************************************
 
@@ -233,7 +244,7 @@ clear
 // Pull any remaining desired UNStat data- respectively in order of codes these are
 // Econ loss due to natural disasters (current USD), and as share of GDP
 // Count of undernourished people (in lieu of preferable calorie data)
-import excel "UNSTAT Hunger and Disaster Econ Loss", sheet("data") firstrow
+import excel "${Input}/UNSTAT Hunger and Disaster Econ Loss.xlsx", sheet("data") firstrow
 keep if SeriesCode == "VC_DSR_GDPLS" | SeriesCode == "VC_DSR_LSGP" | SeriesCode == "SN_ITK_DEFCN"
 keep SeriesCode TimePeriod GeoAreaName Value
 
@@ -279,14 +290,14 @@ replace RecipientName = "Wallis and Futuna" if RecipientName == "Wallis and Futu
 reshape wide `UNStatInd', i(RecipientName) j(TimePeriod)
 
 // Save
-save Clean_UNSTAT, replace
+save "${Intermediate_Data}/Clean_UNSTAT", replace
 
 *****************************************************************************
 
 * For health: consider Maternal and child mortality- need the info on number of live births, or could calculate around this by births per woman, and then number of women
 
 // Polity democracy data- add if desired, use stata thesis copy
-import excel "p4v2018", firstrow clear
+import excel "${Input}/p4v2018.xls", firstrow clear
 keep country year polity2
 drop if year < 2012 | year > 2017
 
@@ -317,13 +328,13 @@ replace RecipientName = "Viet Nam" if RecipientName == "Vietnam"
 // Reshape to wider format
 reshape wide polity2, i(RecipientName) j(year)
 
-save Clean_Polity4, replace
+save "${Intermediate_Data}/Clean_Polity4", replace
 
 *****************************************************************************
 
 // Find a gender inequality index somewhere on the web and download it here. Focus on legal measures.
 * UN HDI Gender
-import excel "C:\Users\Isaac Liu\OneDrive - Georgetown University\Senior\Spring Class\International Development Organizations\HDI Gender.xlsx", sheet("HDI Gender") firstrow clear
+import excel "${Input}/HDI Gender.xlsx", sheet("HDI Gender") firstrow clear
 ren Country RecipientName
 ren B GI2012
 ren C GI2013
@@ -356,12 +367,12 @@ replace RecipientName = "Moldova" if RecipientName == "Moldova (Republic of)"
 replace RecipientName = "Tanzania" if RecipientName == "Tanzania (United Republic of)"
 replace RecipientName = "Venezuela" if RecipientName == "Venezuela (Bolivarian Republic of)"
 
-save Clean_HDI_Gender, replace
+save "${Intermediate_Data}/Clean_HDI_Gender", replace
 
 *****************************************************************************
 
 * World Bank: Women, Business, and the Law
-import excel "C:\Users\Isaac Liu\OneDrive - Georgetown University\Senior\Spring Class\International Development Organizations\WB WBL.xlsx", sheet("WBL1971-2020") firstrow clear
+import excel "${Input}/WB WBL.xlsx", sheet("WBL1971-2020") firstrow clear
 ren A RecipientName
 ren B year
 ren C WBLIndex
@@ -406,7 +417,7 @@ replace RecipientName = "Sao Tome and Principe" if RecipientName == "São Tomé 
 *Prep for merging
 reshape wide WBLIndex, i(RecipientName) j(year)
 
-save Clean_WBL, replace
+save "${Intermediate_Data}Clean_WBL", replace
 
 *****************************************************************************
 
@@ -442,7 +453,7 @@ drop if strpos(RecipientName, "unspecified") != 0
 drop if strpos(RecipientName, "Yugoslavia") != 0
 tab RecipientName
 
-save fmergedready, replace
+save "${Intermediate_Data}fmergedready", replace
 
 *****************************************************************************
 
@@ -553,7 +564,7 @@ capture: gen sp`indicator'`year' = r(rho)
 *}
 
 *Save the wide format dataset
-save merged_IDOS_wide, replace
+save "${Intermediate_Data}merged_IDOS_wide", replace
 
 *****************************************************************************
 
@@ -782,7 +793,7 @@ keep `aggInd' `aidInds' polity2
 estpost sum
 esttab . using "sumstatsLong.rtf", label cells("mean sd count") noobs replace
 restore
-save merged_IDOS_long, replace
+save "${Intermediate_Data}merged_IDOS_long", replace
 
 *****************************************************************************
 
@@ -914,6 +925,6 @@ capture: esttab avgncols avgp2ols avgwinstp avgwinstdrm using "avgregs.rtf", lab
 *Single/overall spearman and regression for need and aid for all indicators.
 *In both of these cases, do means.
 
-save merged_IDOs_end, replace
+save "${Intermediate_Data}merged_IDOs_end", replace
 
 * Regional analysis: reload if desired.
