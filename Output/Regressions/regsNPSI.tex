@@ -1,0 +1,29 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                &\multicolumn{1}{c}{SDG 16 (Aid Share)}&\multicolumn{1}{c}{SDG 16 (Aid Share)}&\multicolumn{1}{c}{SDG 16 (Aid Share)}&\multicolumn{1}{c}{SDG 16 (Aid Share)}\\
+\hline
+Public Sector and Institutions Need (Need Share)&    1.725\sym{***}&    1.281\sym{**} &    5.191         &    5.291\sym{*}  \\
+                &   (3.79)         &   (3.28)         &   (1.94)         &   (1.98)         \\
+[1em]
+Polity (Revised) Combined Democracy Score&                  & 0.000115         &0.0000687         &-0.0000119         \\
+                &                  &   (0.60)         &   (0.33)         &  (-0.06)         \\
+[1em]
+WGI Public Sector/Institutions score (higher = stronger)&                  &                  &    0.147         &    0.179         \\
+                &                  &                  &   (1.60)         &   (1.86)         \\
+[1em]
+WGI Revenue Mobilization Score (higher = stronger)&                  &                  &                  &  -0.0325\sym{*}  \\
+                &                  &                  &                  &  (-2.51)         \\
+[1em]
+Constant        &  -0.0103\sym{*}  & -0.00387         &   -0.149         &   -0.148         \\
+                &  (-1.97)         &  (-0.90)         &  (-1.61)         &  (-1.60)         \\
+\hline
+Observations    &      424         &      352         &      352         &      352         \\
+\(R^{2}\)       &    0.040         &    0.027         &    0.033         &    0.039         \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize \textit{t} statistics in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}

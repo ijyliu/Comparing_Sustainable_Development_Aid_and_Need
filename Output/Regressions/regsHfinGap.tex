@@ -1,0 +1,29 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                &\multicolumn{1}{c}{SDG 3 (Aid Share)}&\multicolumn{1}{c}{SDG 3 (Aid Share)}&\multicolumn{1}{c}{SDG 3 (Aid Share)}&\multicolumn{1}{c}{SDG 3 (Aid Share)}\\
+\hline
+Health Financing Gap (Need Share)&    0.124\sym{***}&    0.116\sym{***}&    0.315\sym{**} &    0.316\sym{**} \\
+                &   (5.71)         &   (5.52)         &   (2.82)         &   (2.74)         \\
+[1em]
+Polity (Revised) Combined Democracy Score&                  &0.0000115         &-0.000146         &-0.0000679         \\
+                &                  &   (0.14)         &  (-0.89)         &  (-0.42)         \\
+[1em]
+WGI Public Sector/Institutions score (higher = stronger)&                  &                  &   0.0119         &  -0.0206\sym{*}  \\
+                &                  &                  &   (1.33)         &  (-2.04)         \\
+[1em]
+WGI Revenue Mobilization Score (higher = stronger)&                  &                  &                  &   0.0388\sym{**} \\
+                &                  &                  &                  &   (3.04)         \\
+[1em]
+Constant        &  0.00713\sym{***}&  0.00807\sym{***}&  0.00507         & -0.00217         \\
+                &  (15.84)         &  (14.37)         &   (0.98)         &  (-0.34)         \\
+\hline
+Observations    &      737         &      632         &      334         &      334         \\
+\(R^{2}\)       &    0.083         &    0.076         &    0.167         &    0.186         \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize \textit{t} statistics in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}

@@ -1,0 +1,29 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                &\multicolumn{1}{c}{SDG 12 (Aid Share)}&\multicolumn{1}{c}{SDG 12 (Aid Share)}&\multicolumn{1}{c}{SDG 12 (Aid Share)}&\multicolumn{1}{c}{SDG 12 (Aid Share)}\\
+\hline
+CO2 per unit of GDP (Need Share)&    0.221\sym{*}  &    0.193         &    0.193         &    0.176         \\
+                &   (2.15)         &   (1.82)         &   (1.67)         &   (1.53)         \\
+[1em]
+Polity (Revised) Combined Democracy Score&                  &-0.000566\sym{**} &-0.000950\sym{**} &-0.000920\sym{**} \\
+                &                  &  (-2.94)         &  (-2.82)         &  (-2.76)         \\
+[1em]
+WGI Public Sector/Institutions score (higher = stronger)&                  &                  &   0.0413\sym{**} &   0.0259\sym{*}  \\
+                &                  &                  &   (3.30)         &   (2.10)         \\
+[1em]
+WGI Revenue Mobilization Score (higher = stronger)&                  &                  &                  &   0.0187\sym{*}  \\
+                &                  &                  &                  &   (2.30)         \\
+[1em]
+Constant        &  0.00658\sym{***}&  0.00957\sym{***}&  -0.0151\sym{*}  &  -0.0186\sym{*}  \\
+                &   (7.75)         &   (7.87)         &  (-2.27)         &  (-2.58)         \\
+\hline
+Observations    &      592         &      519         &      281         &      281         \\
+\(R^{2}\)       &    0.009         &    0.047         &    0.141         &    0.147         \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize \textit{t} statistics in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}

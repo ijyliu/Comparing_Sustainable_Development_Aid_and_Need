@@ -1,0 +1,29 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                &\multicolumn{1}{c}{SDG 2 (Aid Share)}&\multicolumn{1}{c}{SDG 2 (Aid Share)}&\multicolumn{1}{c}{SDG 2 (Aid Share)}&\multicolumn{1}{c}{SDG 2 (Aid Share)}\\
+\hline
+Count of Undernourished (Need Share)&   0.0938\sym{***}&   0.0866\sym{***}&    0.177\sym{*}  &    0.177\sym{*}  \\
+                &   (4.54)         &   (4.33)         &   (2.26)         &   (2.22)         \\
+[1em]
+Polity (Revised) Combined Democracy Score&                  &-0.000277\sym{*}  &-0.000500         &-0.000464         \\
+                &                  &  (-2.46)         &  (-1.96)         &  (-1.86)         \\
+[1em]
+WGI Public Sector/Institutions score (higher = stronger)&                  &                  &   0.0103         &  -0.0167         \\
+                &                  &                  &   (0.80)         &  (-1.29)         \\
+[1em]
+WGI Revenue Mobilization Score (higher = stronger)&                  &                  &                  &   0.0316\sym{**} \\
+                &                  &                  &                  &   (2.68)         \\
+[1em]
+Constant        &  0.00799\sym{***}&  0.00955\sym{***}&  0.00781         &  0.00213         \\
+                &  (15.36)         &  (11.98)         &   (1.07)         &   (0.27)         \\
+\hline
+Observations    &      567         &      512         &      248         &      248         \\
+\(R^{2}\)       &    0.047         &    0.058         &    0.116         &    0.130         \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize \textit{t} statistics in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}

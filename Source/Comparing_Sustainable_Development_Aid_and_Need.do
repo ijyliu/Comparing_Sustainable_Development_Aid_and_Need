@@ -14,6 +14,7 @@ global Input = "${Root}/Input"
 global Output = "${Root}/Output"
 global Intermediate_Data = "${Output}/Intermediate_Data"
 global Intermediate_Figures = "${Output}/Intermediate_Figures"
+global Tables = "${Output}/Tables"
 global Regressions = "${Output}/Regressions"
 global Figures = "${Output}/Figures"
 
@@ -428,17 +429,17 @@ save "${Intermediate_Data}/Clean_WBL", replace
 
 * Merge all datasets, toss out situations with data which is not in the aid dataset (this also tosses out situations where there is no aid data/countries are developed). merge code 2 means using (or importing data) only.
 
-use Clean_Disbursements, clear
+use "${Intermediate_Data}/Clean_Disbursements", clear
 
-merge 1:1 RecipientName using Clean_WB, gen(merge1)
+merge 1:1 RecipientName using "${Intermediate_Data}/Clean_WB", gen(merge1)
 drop if merge1 == 2
-merge 1:1 RecipientName using Clean_UNSTAT, gen(merge2)
+merge 1:1 RecipientName using "${Intermediate_Data}/Clean_UNSTAT", gen(merge2)
 drop if merge2 == 2
-merge 1:1 RecipientName using Clean_Polity4, gen(merge3)
+merge 1:1 RecipientName using "${Intermediate_Data}/Clean_Polity4", gen(merge3)
 drop if merge3 == 2
-merge 1:1 RecipientName using Clean_HDI_Gender, gen(merge4)
+merge 1:1 RecipientName using "${Intermediate_Data}/Clean_HDI_Gender", gen(merge4)
 drop if merge4 == 2
-merge 1:1 RecipientName using Clean_WBL, gen(merge5)
+merge 1:1 RecipientName using "${Intermediate_Data}/Clean_WBL", gen(merge5)
 drop if merge5 == 2
 drop merge*
 *also add in some other merge vars for any other need datasets merge ops

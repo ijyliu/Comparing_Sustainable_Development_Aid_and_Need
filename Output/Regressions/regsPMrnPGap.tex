@@ -1,0 +1,29 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                &\multicolumn{1}{c}{SDG 14 (Aid Share)}&\multicolumn{1}{c}{SDG 14 (Aid Share)}&\multicolumn{1}{c}{SDG 14 (Aid Share)}&\multicolumn{1}{c}{SDG 14 (Aid Share)}\\
+\hline
+Marine Protected Areas Percentage Gap (Need Share)&    0.180         &    0.190         &   -0.622         &   -0.659         \\
+                &   (0.38)         &   (0.33)         &  (-1.36)         &  (-1.38)         \\
+[1em]
+Polity (Revised) Combined Democracy Score&                  &-0.000816         &-0.000184         &-0.000281         \\
+                &                  &  (-1.48)         &  (-0.54)         &  (-0.67)         \\
+[1em]
+WGI Public Sector/Institutions score (higher = stronger)&                  &                  &   0.0540\sym{**} &   0.0734\sym{*}  \\
+                &                  &                  &   (2.70)         &   (2.05)         \\
+[1em]
+WGI Revenue Mobilization Score (higher = stronger)&                  &                  &                  &  -0.0203         \\
+                &                  &                  &                  &  (-0.60)         \\
+[1em]
+Constant        &  0.00932         &   0.0140         &  -0.0123         & -0.00913         \\
+                &   (1.66)         &   (1.90)         &  (-1.11)         &  (-0.65)         \\
+\hline
+Observations    &      176         &      150         &       61         &       61         \\
+\(R^{2}\)       &    0.001         &    0.029         &    0.084         &    0.091         \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize \textit{t} statistics in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}

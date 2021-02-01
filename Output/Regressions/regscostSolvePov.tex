@@ -1,0 +1,29 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                &\multicolumn{1}{c}{SDG 1 (Aid Share)}&\multicolumn{1}{c}{SDG 1 (Aid Share)}&\multicolumn{1}{c}{SDG 1 (Aid Share)}&\multicolumn{1}{c}{SDG 1 (Aid Share)}\\
+\hline
+Cost to Solve Poverty (Perf. Targ.) (Need Share)&    0.371\sym{***}&    0.352\sym{***}&    0.456\sym{***}&    0.468\sym{***}\\
+                &   (3.77)         &   (3.41)         &   (5.23)         &   (4.99)         \\
+[1em]
+Polity (Revised) Combined Democracy Score&                  &-0.000882         & -0.00293         & -0.00297         \\
+                &                  &  (-1.03)         &  (-1.30)         &  (-1.31)         \\
+[1em]
+WGI Public Sector/Institutions score (higher = stronger)&                  &                  &    0.162         &    0.221\sym{*}  \\
+                &                  &                  &   (1.80)         &   (2.39)         \\
+[1em]
+WGI Revenue Mobilization Score (higher = stronger)&                  &                  &                  &  -0.0868         \\
+                &                  &                  &                  &  (-0.69)         \\
+[1em]
+Constant        &   0.0152\sym{***}&   0.0202\sym{**} &  -0.0637         &  -0.0397         \\
+                &   (5.43)         &   (3.04)         &  (-1.31)         &  (-0.55)         \\
+\hline
+Observations    &      248         &      241         &       82         &       82         \\
+\(R^{2}\)       &    0.190         &    0.196         &    0.345         &    0.351         \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize \textit{t} statistics in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}

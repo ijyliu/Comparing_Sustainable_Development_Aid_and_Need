@@ -1,0 +1,29 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                &\multicolumn{1}{c}{SDG 11 (Aid Share)}&\multicolumn{1}{c}{SDG 11 (Aid Share)}&\multicolumn{1}{c}{SDG 11 (Aid Share)}&\multicolumn{1}{c}{SDG 11 (Aid Share)}\\
+\hline
+Economic Loss to Disasters (Need Share)&   0.0136         &   0.0113         &    0.159\sym{***}&    0.170\sym{***}\\
+                &   (1.28)         &   (1.04)         &   (5.45)         &   (4.58)         \\
+[1em]
+Polity (Revised) Combined Democracy Score&                  &0.0000229         &-0.0000758         &-0.00000552         \\
+                &                  &   (0.06)         &  (-0.18)         &  (-0.01)         \\
+[1em]
+WGI Public Sector/Institutions score (higher = stronger)&                  &                  &   0.0837\sym{***}&   0.0109         \\
+                &                  &                  &   (4.28)         &   (0.28)         \\
+[1em]
+WGI Revenue Mobilization Score (higher = stronger)&                  &                  &                  &   0.0923\sym{*}  \\
+                &                  &                  &                  &   (2.34)         \\
+[1em]
+Constant        &   0.0188\sym{***}&   0.0200\sym{***}&  -0.0318\sym{**} &  -0.0522\sym{***}\\
+                &  (10.02)         &   (7.57)         &  (-2.85)         &  (-4.18)         \\
+\hline
+Observations    &      314         &      294         &      157         &      157         \\
+\(R^{2}\)       &    0.002         &    0.001         &    0.089         &    0.124         \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize \textit{t} statistics in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}

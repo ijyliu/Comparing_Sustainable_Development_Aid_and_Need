@@ -1,0 +1,29 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                &\multicolumn{1}{c}{SDG 11 (Aid Share)}&\multicolumn{1}{c}{SDG 11 (Aid Share)}&\multicolumn{1}{c}{SDG 11 (Aid Share)}&\multicolumn{1}{c}{SDG 11 (Aid Share)}\\
+\hline
+Urban Slum Population (Need Share)&    0.481\sym{*}  &    0.479\sym{*}  &    0.437\sym{***}&    0.432\sym{***}\\
+                &   (2.36)         &   (2.27)         &   (3.87)         &   (3.83)         \\
+[1em]
+Polity (Revised) Combined Democracy Score&                  &-0.000322         &-0.000548         &-0.000559         \\
+                &                  &  (-0.71)         &  (-0.99)         &  (-1.01)         \\
+[1em]
+WGI Public Sector/Institutions score (higher = stronger)&                  &                  &   0.0407         &   0.0484\sym{*}  \\
+                &                  &                  &   (1.81)         &   (2.09)         \\
+[1em]
+WGI Revenue Mobilization Score (higher = stronger)&                  &                  &                  & -0.00790         \\
+                &                  &                  &                  &  (-0.77)         \\
+[1em]
+Constant        &  0.00567\sym{**} &  0.00709\sym{**} &  -0.0178         &  -0.0170         \\
+                &   (3.09)         &   (2.69)         &  (-1.62)         &  (-1.51)         \\
+\hline
+Observations    &      183         &      175         &       98         &       98         \\
+\(R^{2}\)       &    0.344         &    0.346         &    0.221         &    0.222         \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize \textit{t} statistics in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}

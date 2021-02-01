@@ -1,0 +1,29 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                &\multicolumn{1}{c}{SDG 4 (Aid Share)}&\multicolumn{1}{c}{SDG 4 (Aid Share)}&\multicolumn{1}{c}{SDG 4 (Aid Share)}&\multicolumn{1}{c}{SDG 4 (Aid Share)}\\
+\hline
+Education Financing Gap (Need Share)&    0.270\sym{**} &    0.274\sym{**} &    0.263\sym{*}  &    0.264\sym{*}  \\
+                &   (3.06)         &   (3.08)         &   (2.52)         &   (2.54)         \\
+[1em]
+Polity (Revised) Combined Democracy Score&                  &-0.000324\sym{*}  &-0.000140         &-0.000186         \\
+                &                  &  (-2.29)         &  (-0.69)         &  (-0.95)         \\
+[1em]
+WGI Public Sector/Institutions score (higher = stronger)&                  &                  & -0.00750         &  0.00990         \\
+                &                  &                  &  (-0.56)         &   (0.67)         \\
+[1em]
+WGI Revenue Mobilization Score (higher = stronger)&                  &                  &                  &  -0.0234         \\
+                &                  &                  &                  &  (-1.06)         \\
+[1em]
+Constant        &   0.0108\sym{***}&   0.0119\sym{***}&   0.0183\sym{*}  &   0.0240         \\
+                &   (9.20)         &   (8.04)         &   (2.07)         &   (1.90)         \\
+\hline
+Observations    &      404         &      363         &      225         &      225         \\
+\(R^{2}\)       &    0.252         &    0.310         &    0.299         &    0.302         \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize \textit{t} statistics in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}
