@@ -347,8 +347,8 @@ ren G GI2017
 local years "2012 2013 2014 2015 2016 2017"
 
 foreach year in `years' {
-replace GI`year' = "." if GI`year' == ".."
-destring GI`year', replace
+    replace GI`year' = "." if GI`year' == ".."
+    destring GI`year', replace
 }
 
 * Data cleaning
@@ -443,8 +443,8 @@ drop merge*
 
 * Consider population weighting gender inequality indices. I don't know if i'll use these in future- will just leave out of analysis for now. I didn't weight the Ginis.
 *foreach year in `years' {
-*gen pGI`year' = GI`year'*sp_pop_totl`year'
-*gen pWBLIndex`year' = WBLIndex`year'*sp_pop_totl`year'
+    *gen pGI`year' = GI`year'*sp_pop_totl`year'
+    *gen pWBLIndex`year' = WBLIndex`year'*sp_pop_totl`year'
 *}
 
 * Toss out regions to focus on country data only
@@ -615,9 +615,9 @@ label var ammNSCS "Statistical Capacity Need"
 * Old code: just the means
 tsset year
 foreach indicator in `ammInds'{
-twoway (connect `indicator' year,  cmissing(n)), ytitle(Mean Absolute Mismatch) yscale(range(0 0.05)) ylabel(#5) ttitle(Year) title(`: var label `indicator'')
-* Special treament including missing values or cutting the number of years for TFinGap or Urban Slum Pop? Could make this loop with an if/else split.
-graph save `indicator', replace
+    twoway (connect `indicator' year,  cmissing(n)), ytitle(Mean Absolute Mismatch) yscale(range(0 0.05)) ylabel(#5) ttitle(Year) title(`: var label `indicator'')
+    * Special treament including missing values or cutting the number of years for TFinGap or Urban Slum Pop? Could make this loop with an if/else split.
+    graph save `indicator', replace
 }
 
 * Create a table of graphs
@@ -633,8 +633,8 @@ graph export thirdEight, as(png) name("Graph") replace
 * New code with min and max graphs
 tsset year
 foreach indicator in `aggInd'{
-twoway (connect amm`indicator' year,  cmissing(n)) (connect minamm`indicator' year,  cmissing(n)) (connect maxamm`indicator' year,  cmissing(n)), ytitle(Absolute Mismatch)  ttitle(Year) title(Max-Mean-Min: `: var label amm`indicator'') legend(off)
-graph save maxtominamm`indicator', replace
+    twoway (connect amm`indicator' year,  cmissing(n)) (connect minamm`indicator' year,  cmissing(n)) (connect maxamm`indicator' year,  cmissing(n)), ytitle(Absolute Mismatch)  ttitle(Year) title(Max-Mean-Min: `: var label amm`indicator'') legend(off)
+    graph save maxtominamm`indicator', replace
 }
 
 * Create a table of graphs
@@ -918,7 +918,7 @@ capture: esttab avgncols avgp2ols avgwinstp avgwinstdrm using "${Regressions}/av
 *drop *2012 *2013 *2014 *2015 *2016 *2017
 *Bring back adefs
 *foreach indicator in `aggInd' {
-*gen adef`indicator' = abs(Def`indicator'`year')
+    *gen adef`indicator' = abs(Def`indicator'`year')
 *}
 *Create a mean adef indicator for a country
 *egen cma = rowmean(adef*)
