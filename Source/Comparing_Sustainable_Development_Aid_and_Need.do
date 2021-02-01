@@ -459,7 +459,7 @@ save "${Intermediate_Data}/fmergedready", replace
 
 * Collect summary statistics
 estpost sum
-esttab . using "sumstatsWide.tex", cells("mean sd count") noobs replace label
+esttab . using "${Tables}/sumstatsWide.tex", cells("mean sd count") noobs replace label
 
 // Identify aggregable indicators, create macro
 local aggInd "extPoorCt costSolvePov SN_ITK_DEFCN HfinGap EfinGap illiterate GI WBLIndex noSafeWater noSafeSan noElec unemployedCt TfinGap EnfinGap si_pov_gini uSlumPop VC_DSR_GDPLS co2pgdp NRenShare PMrnPGap PLandPGap PLandGap vc_idp_tocv NPSI NRM NSCS"
@@ -467,100 +467,101 @@ local aggInd "extPoorCt costSolvePov SN_ITK_DEFCN HfinGap EfinGap illiterate GI 
 // Stationary (within single-year) analysis
 foreach year in `years' {
 
-*Put aid in indicator, not goal terms
-gen aidextPoorCt`year' = Value_USD1`year'
-gen aidcostSolvePov`year' = Value_USD1`year'
-gen aidSN_ITK_DEFCN`year' = Value_USD2`year'
-gen aidHfinGap`year' = Value_USD3`year'
-gen aidEfinGap`year' = Value_USD4`year'
-gen aidilliterate`year' = Value_USD4`year'
-gen aidGI`year' = Value_USD5`year'
-gen aidWBLIndex`year' = Value_USD5`year'
-gen aidnoSafeWater`year' = Value_USD6`year'
-gen aidnoSafeSan`year' = Value_USD6`year'
-gen aidnoElec`year' = Value_USD7`year'
-gen aidunemployedCt`year' = Value_USD8`year'
-gen aidTfinGap`year' = Value_USD9`year'
-gen aidEnfinGap`year' = Value_USD9`year'
-gen aidsi_pov_gini`year' = Value_USD10`year'
-gen aiduSlumPop`year' = Value_USD11`year'
-gen aidVC_DSR_GDPLS`year' = Value_USD11`year'
-gen aidco2pgdp`year' = Value_USD12`year'
-gen aidNRenShare`year' = Value_USD13`year'
-gen aidPMrnPGap`year' = Value_USD14`year'
-gen aidPLandPGap`year' = Value_USD15`year'
-gen aidPLandGap`year' = Value_USD15`year'
-gen aidvc_idp_tocv`year' = Value_USD16`year'
-gen aidNPSI`year' = Value_USD16`year'
-gen aidNRM`year' = Value_USD17`year'
-gen aidNSCS`year' = Value_USD17`year'
-drop Value_USD1`year' Value_USD2`year' Value_USD3`year' Value_USD4`year' Value_USD5`year' Value_USD6`year' Value_USD7`year' Value_USD8`year' Value_USD9`year' Value_USD10`year' Value_USD11`year' Value_USD12`year' Value_USD13`year' Value_USD14`year' Value_USD15`year' Value_USD16`year' Value_USD17`year'
+    *Put aid in indicator, not goal terms
+    gen aidextPoorCt`year' = Value_USD1`year'
+    gen aidcostSolvePov`year' = Value_USD1`year'
+    gen aidSN_ITK_DEFCN`year' = Value_USD2`year'
+    gen aidHfinGap`year' = Value_USD3`year'
+    gen aidEfinGap`year' = Value_USD4`year'
+    gen aidilliterate`year' = Value_USD4`year'
+    gen aidGI`year' = Value_USD5`year'
+    gen aidWBLIndex`year' = Value_USD5`year'
+    gen aidnoSafeWater`year' = Value_USD6`year'
+    gen aidnoSafeSan`year' = Value_USD6`year'
+    gen aidnoElec`year' = Value_USD7`year'
+    gen aidunemployedCt`year' = Value_USD8`year'
+    gen aidTfinGap`year' = Value_USD9`year'
+    gen aidEnfinGap`year' = Value_USD9`year'
+    gen aidsi_pov_gini`year' = Value_USD10`year'
+    gen aiduSlumPop`year' = Value_USD11`year'
+    gen aidVC_DSR_GDPLS`year' = Value_USD11`year'
+    gen aidco2pgdp`year' = Value_USD12`year'
+    gen aidNRenShare`year' = Value_USD13`year'
+    gen aidPMrnPGap`year' = Value_USD14`year'
+    gen aidPLandPGap`year' = Value_USD15`year'
+    gen aidPLandGap`year' = Value_USD15`year'
+    gen aidvc_idp_tocv`year' = Value_USD16`year'
+    gen aidNPSI`year' = Value_USD16`year'
+    gen aidNRM`year' = Value_USD17`year'
+    gen aidNSCS`year' = Value_USD17`year'
+    drop Value_USD1`year' Value_USD2`year' Value_USD3`year' Value_USD4`year' Value_USD5`year' Value_USD6`year' Value_USD7`year' Value_USD8`year' Value_USD9`year' Value_USD10`year' Value_USD11`year' Value_USD12`year' Value_USD13`year' Value_USD14`year' Value_USD15`year' Value_USD16`year' Value_USD17`year'
 
-*Compute shares of need, among only those with aid data present
-foreach indicator in `aggInd' {
-egen ti`indicator'`year' = total(cond(aid`indicator'`year' !=  ., `indicator'`year', .))
-gen ns`indicator'`year' = `indicator'`year'/ti`indicator'`year'
-*Save variable space
-drop ti`indicator'`year'
-}
+    *Compute shares of need, among only those with aid data present
+    foreach indicator in `aggInd' {
+        egen ti`indicator'`year' = total(cond(aid`indicator'`year' !=  ., `indicator'`year', .))
+        gen ns`indicator'`year' = `indicator'`year'/ti`indicator'`year'
+        *Save variable space
+        drop ti`indicator'`year'
+    }
 
-*Compute shares of aid
-foreach indicator in `aggInd' {
-egen ta`indicator'`year' = total(cond(`indicator'`year' != ., aid`indicator'`year', .))
-gen ais`indicator'`year' = aid`indicator'`year'/ta`indicator'`year'
-*Save variable space
-drop ta`indicator'`year'
-}
+    *Compute shares of aid
+    foreach indicator in `aggInd' {
+        egen ta`indicator'`year' = total(cond(`indicator'`year' != ., aid`indicator'`year', .))
+        gen ais`indicator'`year' = aid`indicator'`year'/ta`indicator'`year'
+        *Save variable space
+        drop ta`indicator'`year'
+    }
 
-*Note: corrected aidshare to deal with few indicator observation years- aidshare should be among those (denom/total only including) which have need data? Similar correction for needshare. Judge only overlapping cases.
-*This may actually be a somewhat different interpretation, since perhaps aid should or can only be given to countries for which there is data available on indicators. So the old dofile is still saved.
+    *Note: corrected aidshare to deal with few indicator observation years- aidshare should be among those (denom/total only including) which have need data? Similar correction for needshare. Judge only overlapping cases.
+    *This may actually be a somewhat different interpretation, since perhaps aid should or can only be given to countries for which there is data available on indicators. So the old dofile is still saved.
 
-*Need and aid deviation (shares), computed for each need indicator
-foreach indicator in `aggInd' {
-gen Def`indicator'`year' = ais`indicator'`year' - ns`indicator'`year'
-}
+    *Need and aid deviation (shares), computed for each need indicator
+    foreach indicator in `aggInd' {
+        gen Def`indicator'`year' = ais`indicator'`year' - ns`indicator'`year'
+    }
 
-*Create the mismatch index (and variants) for each indicator
-foreach indicator in `aggInd' {
-egen mm`indicator'`year' = mean(Def`indicator'`year')
-gen adef`indicator'`year' = abs(Def`indicator'`year')
-egen amm`indicator'`year' = mean(adef`indicator'`year')
-egen maxamm`indicator'`year' = max(adef`indicator'`year')
-egen minamm`indicator'`year' = min(adef`indicator'`year')
-*gen sdef`indicator'`year' = (Def`indicator'`year')^2
-*egen smm`indicator'`year' = mean(sdef`indicator'`year')
-}
+    *Create the mismatch index (and variants) for each indicator
+    foreach indicator in `aggInd' {
+        egen mm`indicator'`year' = mean(Def`indicator'`year')
+        gen adef`indicator'`year' = abs(Def`indicator'`year')
+        egen amm`indicator'`year' = mean(adef`indicator'`year')
+        egen maxamm`indicator'`year' = max(adef`indicator'`year')
+        egen minamm`indicator'`year' = min(adef`indicator'`year')
+        *gen sdef`indicator'`year' = (Def`indicator'`year')^2
+        *egen smm`indicator'`year' = mean(sdef`indicator'`year')
+    }
 
-*Spearman's rank coefficient analysis
-*Take advantage of the fact shares are ordinally the same as actual values.
-foreach indicator in `aggInd'{
-capture: spearman ais`indicator'`year' ns`indicator'`year'
-capture: gen sp`indicator'`year' = r(rho)
-*matrix A = r(rho)
-*esttab matrix(A, fmt(%5.2f)) using sp`indicator'`year'.tex, replace
-*eststo clear
-}
+    *Spearman's rank coefficient analysis
+    *Take advantage of the fact shares are ordinally the same as actual values.
+    foreach indicator in `aggInd'{
+        capture: spearman ais`indicator'`year' ns`indicator'`year'
+        capture: gen sp`indicator'`year' = r(rho)
+        *matrix A = r(rho)
+        *esttab matrix(A, fmt(%5.2f)) using sp`indicator'`year'.tex, replace
+        *eststo clear
+    }
 
-*Regression analysis. Sample size unfortanately probably kind of small here.
-*foreach indicator in `aggInd' {
-*capture: reg ais`indicator'`year' ns`indicator'`year', robust
-*capture: eststo ncols`indicator'`year'
-*Throw in controls, and print their output. Just democracy (polity2) for now.
-*capture: reg ais`indicator'`year' ns`indicator'`year' polity2`year', robust
-*capture: eststo p2ols`indicator'`year'
-*capture: esttab ncols`indicator'`year' p2ols`indicator'`year' using "ols`indicator'`year'.tex"
-*eststo clear
-*}
+    *Regression analysis. Sample size unfortanately probably kind of small here.
+    *foreach indicator in `aggInd' {
+        *capture: reg ais`indicator'`year' ns`indicator'`year', robust
+        *capture: eststo ncols`indicator'`year'
+        *Throw in controls, and print their output. Just democracy (polity2) for now.
+        *capture: reg ais`indicator'`year' ns`indicator'`year' polity2`year', robust
+        *capture: eststo p2ols`indicator'`year'
+        *capture: esttab ncols`indicator'`year' p2ols`indicator'`year' using "ols`indicator'`year'.tex"
+        *eststo clear
+    *}
+
 }
 
 * Starting at a ranking or bump chart
 * Need to interpolate first due to data availability?
 * Scratch this actually, since it's persistently broken
 *foreach `year' in `years' {
-*foreach `indicator' in `aggInd' {
-*egen rankaid`indicator'`year' = rank(-ais`indicator'`year')
-*egen rankneed`indicator'`year' = rank(-ns`indicator'`year')
-*}
+    *foreach `indicator' in `aggInd' {
+        *egen rankaid`indicator'`year' = rank(-ais`indicator'`year')
+        *egen rankneed`indicator'`year' = rank(-ns`indicator'`year')
+    *}
 *}
 
 *Save the wide format dataset
@@ -649,7 +650,7 @@ graph export mtmthirdEight, as(png) name("Graph") replace
 * Produce a global amm graph across all indicators
 egen totAmm = rowmean(amm*)
 twoway (connect totAmm year), ytitle(Absolute Mismatch) yscale(range(0 0.05)) ylabel(#7) title(Worldwide Absolute Mismatch (Indicators Eq Weight))
-graph export "C:\Users\Isaac Liu\OneDrive - Georgetown University\Senior\Spring Class\International Development Organizations\wwAggAMM.png", as(png) name("Graph") replace
+graph export "${Figures}/wwAggAMM.png", as(png) name("Graph") replace
 * Look at regular mismatch or squared mismatch if desired. Not very interpretable though.
 
 * Global amm graph, but weighting each goal equally.
@@ -672,7 +673,7 @@ egen ammSDG16 = rowmean(ammvc_idp_tocv ammNPSI)
 egen ammSDG17 = rowmean(ammNRM ammNSCS)
 egen etotAmm = rowmean(ammSDG*)
 twoway (connect etotAmm year), ytitle(Mean Absolute Mismatch) yscale(range(0 0.05)) ylabel(#7) title(Worldwide Mean Absolute Mismatch (Goals Eq Weight))
-graph export "C:\Users\Isaac Liu\OneDrive - Georgetown University\Senior\Spring Class\International Development Organizations\ewwAggAMM.png", as(png) name("Graph") replace
+graph export "${Figures}/ewwAggAMM.png", as(png) name("Graph") replace
 
 *****************************************************************************
 
@@ -681,11 +682,11 @@ graph export "C:\Users\Isaac Liu\OneDrive - Georgetown University\Senior\Spring 
 egen mintotAmm = rowmin(minamm*)
 egen maxtotAmm = rowmax(maxamm*)
 twoway (connect totAmm year) (connect mintotAmm year) (connect maxtotAmm year), ytitle(Absolute Mismatch) title(Max-Mean-Min Absolute Mismatch (Indicators Eq Weight)) legend(off)
-graph export "C:\Users\Isaac Liu\OneDrive - Georgetown University\Senior\Spring Class\International Development Organizations\MtMwwAggAMM.png", as(png) name("Graph") replace
+graph export "${Figures}/MtMwwAggAMM.png", as(png) name("Graph") replace
 
 *Weighting by goal
 twoway (connect etotAmm year) (connect mintotAmm year) (connect maxtotAmm year), ytitle(Absolute Mismatch) title(Max-Mean-Min Absolute Mismatch (Goals Eq Weight)) legend(off)
-graph export "C:\Users\Isaac Liu\OneDrive - Georgetown University\Senior\Spring Class\International Development Organizations\eMtMwwAggAMM.png", as(png) name("Graph") replace
+graph export "${Figures}/eMtMwwAggAMM.png", as(png) name("Graph") replace
 
 * Back to normal
 restore
@@ -733,9 +734,9 @@ label var spNSCS "Statistical Capacity Need"
 * Produce indicator sp graphs over time.
 tsset year
 foreach indicator in `spInds'{
-twoway (connect `indicator' year,  cmissing(n)), ytitle(Spearman Coefficient) yscale(range(0 1)) ylabel(#5) ttitle(Year) title(`: var label `indicator'')
-* Special treament including missing values or cutting the number of years for TFinGap or Urban Slum Pop? Could make this loop with an if/else split.
-graph save `indicator', replace
+    twoway (connect `indicator' year,  cmissing(n)), ytitle(Spearman Coefficient) yscale(range(0 1)) ylabel(#5) ttitle(Year) title(`: var label `indicator'')
+    * Special treament including missing values or cutting the number of years for TFinGap or Urban Slum Pop? Could make this loop with an if/else split.
+    graph save `indicator', replace
 }
 
 * Create a table of graphs
@@ -749,7 +750,7 @@ graph export spthirdEight, as(png) name("Graph") replace
 * Produce a global amm graph across all indicators
 egen totsp = rowmean(sp*)
 twoway (connect totsp year), ytitle(Spearman Coefficient) yscale(range(0 0.05)) ylabel(#7) title(Mean Spearman Coeff (Indicators Eq Weight))
-graph export "C:\Users\Isaac Liu\OneDrive - Georgetown University\Senior\Spring Class\International Development Organizations\spwwAggAMM.png", as(png) name("Graph") replace
+graph export "${Figures}/spwwAggAMM.png", as(png) name("Graph") replace
 * Look at regular mismatch or squared mismatch if desired. Not very interpretable though.
 
 * Global amm graph, but weighting each goal equally.
@@ -771,8 +772,9 @@ egen spSDG15 = rowmean(spPLandGap spPLandPGap)
 egen spSDG16 = rowmean(spvc_idp_tocv spNPSI)
 egen spSDG17 = rowmean(spNRM spNSCS)
 egen etotsp = rowmean(spSDG*)
+
 twoway (connect etotsp year), ytitle(Spearman Coefficient) yscale(range(0 1)) ylabel(#7) title(Mean Spearman Coeff (Goal Eq Weight))
-graph export "C:\Users\Isaac Liu\OneDrive - Georgetown University\Senior\Spring Class\International Development Organizations\ewwAggsp.png", as(png) name("Graph") replace
+graph export "${Figures}ewwAggsp.png", as(png) name("Graph") replace
 
 *Back to normal
 restore
@@ -791,7 +793,7 @@ reshape long `aggInd' `aidInds' `DefInds' `aisInds' `nsInds' polity2, i(Recipien
 preserve
 keep `aggInd' `aidInds' polity2
 estpost sum
-esttab . using "sumstatsLong.tex", label cells("mean sd count") noobs replace
+esttab . using "${Tables}/sumstatsLong.tex", label cells("mean sd count") noobs replace
 restore
 save "${Intermediate_Data}/merged_IDOS_long", replace
 
@@ -802,18 +804,18 @@ save "${Intermediate_Data}/merged_IDOS_long", replace
 * Make more space
 drop mm* amm* sp*
 foreach indicator in `aggInd'{
-preserve
-keep if abs(Def`indicator') > 0.1 & Def`indicator' != .
-capture: export excel RecipientName year Def`indicator' `indicator' aid`indicator' ais`indicator' ns`indicator' using "disC`indicator'.xlsx", firstrow(var) replace
-restore
+    preserve
+    keep if abs(Def`indicator') > 0.1 & Def`indicator' != .
+    capture: export excel RecipientName year Def`indicator' `indicator' aid`indicator' ais`indicator' ns`indicator' using "disC`indicator'.xlsx", firstrow(var) replace
+    restore
 }
 
 *Spearman analysis across time by indicator
 foreach indicator in `aggInd'{
-capture: spearman ais`indicator' ns`indicator'
-matrix A = r(rho)
-esttab matrix(A, fmt(%5.2f)) using "sp`indicator'.tex", replace
-eststo clear
+    capture: spearman ais`indicator' ns`indicator'
+    matrix A = r(rho)
+    esttab matrix(A, fmt(%5.2f)) using "sp`indicator'.tex", replace
+    eststo clear
 }
 
 *Regression analysis across time by indicator
@@ -883,17 +885,17 @@ label var RM "WGI Revenue Mobilization Score (higher = stronger)"
 
 *Execute regressions
 foreach indicator in `aggInd' {
-capture: reg ais`indicator' ns`indicator', robust
-capture: eststo ncols`indicator'
-*Throw in controls, and print their output. Democracy/polity 2, fixed effects, and eventually institutions and domestic resource mobilization.
-capture: reg ais`indicator' ns`indicator' polity2, robust
-capture: eststo p2ols`indicator'
-capture: reg ais`indicator' ns`indicator' polity2 PSI, robust
-capture: eststo winstp`indicator'
-capture: reg ais`indicator' ns`indicator' polity2 PSI RM, robust
-capture: eststo winstdrm`indicator'
-capture: esttab ncols`indicator' p2ols`indicator' winstp`indicator' winstdrm`indicator' using "regs`indicator'.tex", label replace compress r2
-eststo clear
+    capture: reg ais`indicator' ns`indicator', robust
+    capture: eststo ncols`indicator'
+    *Throw in controls, and print their output. Democracy/polity 2, fixed effects, and eventually institutions and domestic resource mobilization.
+    capture: reg ais`indicator' ns`indicator' polity2, robust
+    capture: eststo p2ols`indicator'
+    capture: reg ais`indicator' ns`indicator' polity2 PSI, robust
+    capture: eststo winstp`indicator'
+    capture: reg ais`indicator' ns`indicator' polity2 PSI RM, robust
+    capture: eststo winstdrm`indicator'
+    capture: esttab ncols`indicator' p2ols`indicator' winstp`indicator' winstdrm`indicator' using "${Regressions}/regs`indicator'.tex", label replace compress r2
+    eststo clear
 }
 
 *Across all indicators/sectors regressions.
@@ -908,7 +910,7 @@ capture: reg avgais avgns polity2 PSI, robust
 capture: eststo avgwinstp
 capture: reg avgais avgns polity2 PSI RM, robust
 capture: eststo avgwinstdrm
-capture: esttab avgncols avgp2ols avgwinstp avgwinstdrm using "avgregs.tex", label replace compress
+capture: esttab avgncols avgp2ols avgwinstp avgwinstdrm using "${Regressions}/avgregs.tex", label replace compress
 
 *Analysis for countries by year across all indicators. Optional, perhaps return to later, not too interesting beyond what was already done in disprop c analysis likely.
 *preserve
