@@ -569,8 +569,6 @@ save "${Intermediate_Data}/merged_IDOS_wide", replace
 
 *****************************************************************************
 
-use merged_IDOS_wide, clear
-
 * Cross-time Analysis
 * Tracking Absolute Mismatch over time for all countries
 preserve
@@ -634,16 +632,16 @@ graph export thirdEight, as(png) name("Graph") replace
 tsset year
 foreach indicator in `aggInd'{
     twoway (connect amm`indicator' year,  cmissing(n)) (connect minamm`indicator' year,  cmissing(n)) (connect maxamm`indicator' year,  cmissing(n)), ytitle(Absolute Mismatch)  ttitle(Year) title(Max-Mean-Min: `: var label amm`indicator'') legend(off)
-    graph save maxtominamm`indicator', replace
+    graph save "${Figures}/maxtominamm`indicator'", replace
 }
 
 * Create a table of graphs
-graph combine "maxtominammextPoorCt" "maxtominammcostSolvePov" "maxtominammSN_ITK_DEFCN" "maxtominammHfinGap" "maxtominammEfinGap" "maxtominammilliterate" "maxtominammGI" "maxtominammWBLIndex" "maxtominammnoSafeWater", iscale(0.35)
-graph export mtmfirstNine, as(png) name("Graph") replace
+graph combine "${Figures}/maxtominammextPoorCt" "maxtominammcostSolvePov" "maxtominammSN_ITK_DEFCN" "maxtominammHfinGap" "maxtominammEfinGap" "maxtominammilliterate" "maxtominammGI" "maxtominammWBLIndex" "maxtominammnoSafeWater", iscale(0.35)
+graph export "${Figures}/mtmfirstNine, as(png) name("Graph") replace
 graph combine  "maxtominammnoSafeSan" "maxtominammnoElec" "maxtominammunemployedCt" "maxtominammTfinGap" "maxtominammEnfinGap" "maxtominammsi_pov_gini" "maxtominammuSlumPop" "maxtominammVC_DSR_GDPLS" "maxtominammco2pgdp", iscale(0.35)
-graph export mtmsecondNine, as(png) name("Graph") replace
+graph export "${Figures}/mtmsecondNine, as(png) name("Graph") replace
 graph combine "maxtominammNRenShare" "maxtominammPMrnPGap" "maxtominammPLandPGap" "maxtominammPLandGap" "maxtominammvc_idp_tocv" "maxtominammNPSI" "maxtominammNRM" "maxtominammNSCS", iscale(0.35)
-graph export mtmthirdEight, as(png) name("Graph") replace
+graph export "${Figures}/mtmthirdEight, as(png) name("Graph") replace
 
 *****************************************************************************
 
@@ -736,7 +734,7 @@ tsset year
 foreach indicator in `spInds'{
     twoway (connect `indicator' year,  cmissing(n)), ytitle(Spearman Coefficient) yscale(range(0 1)) ylabel(#5) ttitle(Year) title(`: var label `indicator'')
     * Special treament including missing values or cutting the number of years for TFinGap or Urban Slum Pop? Could make this loop with an if/else split.
-    graph save `indicator', replace
+    graph save "${Figures}/`indicator'", replace
 }
 
 * Create a table of graphs
@@ -774,7 +772,7 @@ egen spSDG17 = rowmean(spNRM spNSCS)
 egen etotsp = rowmean(spSDG*)
 
 twoway (connect etotsp year), ytitle(Spearman Coefficient) yscale(range(0 1)) ylabel(#7) title(Mean Spearman Coeff (Goal Eq Weight))
-graph export "${Figures}ewwAggsp.png", as(png) name("Graph") replace
+graph export "${Figures}/ewwAggsp.png", as(png) name("Graph") replace
 
 *Back to normal
 restore
@@ -806,7 +804,7 @@ drop mm* amm* sp*
 foreach indicator in `aggInd'{
     preserve
     keep if abs(Def`indicator') > 0.1 & Def`indicator' != .
-    capture: export excel RecipientName year Def`indicator' `indicator' aid`indicator' ais`indicator' ns`indicator' using "disC`indicator'.xlsx", firstrow(var) replace
+    capture: export excel RecipientName year Def`indicator' `indicator' aid`indicator' ais`indicator' ns`indicator' using "${Tables}/disC`indicator'.xlsx", firstrow(var) replace
     restore
 }
 
@@ -814,7 +812,7 @@ foreach indicator in `aggInd'{
 foreach indicator in `aggInd'{
     capture: spearman ais`indicator' ns`indicator'
     matrix A = r(rho)
-    esttab matrix(A, fmt(%5.2f)) using "sp`indicator'.tex", replace
+    esttab matrix(A, fmt(%5.2f)) using "${Tables}/sp`indicator'.tex", replace
     eststo clear
 }
 
