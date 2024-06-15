@@ -4,7 +4,7 @@ Isaac Liu
 
 Completed for class in April 2020.
 
-This paper is available on SSRN at
+This paper is available on SSRN at [https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3776263](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3776263).
 
 This repository is dedicated in memory of Joseph B. Serafin on January 24, 2020.
 
